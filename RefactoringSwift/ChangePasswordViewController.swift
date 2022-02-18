@@ -144,10 +144,5 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//
-//    }
 
 }

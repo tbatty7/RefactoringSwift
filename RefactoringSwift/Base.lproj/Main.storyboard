@@ -24,7 +24,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Change My Password"/>
                                 <connections>
-                                    <segue destination="MMk-fg-UL4" kind="presentation" id="FzA-tJ-7hU"/>
+                                    <segue destination="MMk-fg-UL4" kind="presentation" identifier="changePassword" id="FzA-tJ-7hU"/>
                                 </connections>
                             </button>
                         </subviews>
