@@ -22,7 +22,12 @@ class ChangePasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        submitButton.layer.borderWidth = 1
+        submitButton.layer.borderColor = UIColor(red: 55/255, green: 147/255, blue: 251/255, alpha: 1).cgColor
+        submitButton.layer.cornerRadius = 8
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .white
     }
         
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
