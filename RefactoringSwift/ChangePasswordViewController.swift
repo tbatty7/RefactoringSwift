@@ -14,21 +14,15 @@ class ChangePasswordViewController: UIViewController {
     @IBOutlet private(set) var newPasswordTextField: UITextField!
     @IBOutlet private(set) var confirmPasswordTextField: UITextField!
     @IBOutlet private(set) var submitButton: UIButton!
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
     }
-    
-
-
-
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//
+//    }
 
 }
