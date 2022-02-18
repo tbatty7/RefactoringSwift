@@ -69,7 +69,7 @@ class ChangePasswordViewController: UIViewController {
         }
         
         if newPasswordTextField.text != confirmPasswordTextField.text {
-            let alertController = UIAlertController(title: nil, message: "The new password and the confirmation password" +
+            let alertController = UIAlertController(title: nil, message: "The new password and the confirmation password " +
                                                     "don't match. Please try again", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
                 self?.newPasswordTextField.text = ""

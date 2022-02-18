@@ -43,7 +43,7 @@
         <!--Change Password View Controller-->
         <scene sceneID="MGZ-ux-mM7">
             <objects>
-                <viewController id="MMk-fg-UL4" customClass="ChangePasswordViewController" customModule="RefactoringSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChangePasswordViewController" id="MMk-fg-UL4" customClass="ChangePasswordViewController" customModule="RefactoringSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nfa-SG-jw4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,6 +91,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Submit"/>
+                                <connections>
+                                    <action selector="changePassword" destination="MMk-fg-UL4" eventType="touchUpInside" id="TwN-Wf-Iha"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hvr-cv-wMo"/>
