@@ -61,6 +61,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7D9-JN-3GO">
+                                <rect key="frame" x="20" y="160" width="374" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="emc-hr-Zlg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="new-password"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dmV-Ny-IUf">
+                                <rect key="frame" x="20" y="212" width="374" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="FDq-S2-CIr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="new-password"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hvr-cv-wMo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -68,7 +84,13 @@
                             <constraint firstItem="YuE-Ku-dov" firstAttribute="top" secondItem="hvr-cv-wMo" secondAttribute="top" id="28S-j6-Rgq"/>
                             <constraint firstItem="55x-Zd-xHy" firstAttribute="top" secondItem="YuE-Ku-dov" secondAttribute="bottom" constant="20" id="76F-G7-h5i"/>
                             <constraint firstItem="hvr-cv-wMo" firstAttribute="trailing" secondItem="55x-Zd-xHy" secondAttribute="trailing" constant="20" id="8c3-wO-gCB"/>
+                            <constraint firstItem="dmV-Ny-IUf" firstAttribute="leading" secondItem="hvr-cv-wMo" secondAttribute="leading" constant="20" id="B7u-xI-XDa"/>
+                            <constraint firstItem="hvr-cv-wMo" firstAttribute="trailing" secondItem="dmV-Ny-IUf" secondAttribute="trailing" constant="20" id="GEW-3O-44d"/>
+                            <constraint firstItem="dmV-Ny-IUf" firstAttribute="top" secondItem="7D9-JN-3GO" secondAttribute="bottom" constant="8" id="bAq-Yi-PrU"/>
+                            <constraint firstItem="7D9-JN-3GO" firstAttribute="top" secondItem="55x-Zd-xHy" secondAttribute="bottom" constant="8" id="dsO-Xc-FsD"/>
                             <constraint firstItem="55x-Zd-xHy" firstAttribute="leading" secondItem="hvr-cv-wMo" secondAttribute="leading" constant="20" id="ejJ-bV-WYM"/>
+                            <constraint firstItem="hvr-cv-wMo" firstAttribute="trailing" secondItem="7D9-JN-3GO" secondAttribute="trailing" constant="20" id="ffg-Lc-Yib"/>
+                            <constraint firstItem="7D9-JN-3GO" firstAttribute="leading" secondItem="hvr-cv-wMo" secondAttribute="leading" constant="20" id="mI6-94-eNk"/>
                             <constraint firstItem="YuE-Ku-dov" firstAttribute="trailing" secondItem="hvr-cv-wMo" secondAttribute="trailing" id="t87-Lt-QRQ"/>
                             <constraint firstItem="YuE-Ku-dov" firstAttribute="leading" secondItem="hvr-cv-wMo" secondAttribute="leading" id="uQ0-ZY-cY5"/>
                         </constraints>
