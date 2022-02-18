@@ -17,6 +17,7 @@
 		2234307327C01E5A00A485F9 /* PasswordChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2234307227C01E5A00A485F9 /* PasswordChanger.swift */; };
 		2234307527C0259000A485F9 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2234307427C0259000A485F9 /* ChangePasswordViewController.swift */; };
 		2234307727C042AA00A485F9 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2234307627C042AA00A485F9 /* TestHelpers.swift */; };
+		2234307927C0455D00A485F9 /* MockPasswordChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2234307827C0455D00A485F9 /* MockPasswordChanger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		2234307227C01E5A00A485F9 /* PasswordChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChanger.swift; sourceTree = "<group>"; };
 		2234307427C0259000A485F9 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		2234307627C042AA00A485F9 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		2234307827C0455D00A485F9 /* MockPasswordChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPasswordChanger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				2234307027C0092000A485F9 /* ViewControllerTests.swift */,
 				2234307627C042AA00A485F9 /* TestHelpers.swift */,
+				2234307827C0455D00A485F9 /* MockPasswordChanger.swift */,
 			);
 			path = RefactoringSwiftTests;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 			files = (
 				2234307127C0092000A485F9 /* ViewControllerTests.swift in Sources */,
 				2234307727C042AA00A485F9 /* TestHelpers.swift in Sources */,
+				2234307927C0455D00A485F9 /* MockPasswordChanger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
