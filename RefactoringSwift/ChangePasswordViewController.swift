@@ -14,7 +14,12 @@ class ChangePasswordViewController: UIViewController {
     @IBOutlet private(set) var newPasswordTextField: UITextField!
     @IBOutlet private(set) var confirmPasswordTextField: UITextField!
     @IBOutlet private(set) var submitButton: UIButton!
-        
+    
+    private var passwordChanger = PasswordChanger()
+    var securityToken = ""
+    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
