@@ -133,6 +133,18 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
             self?.present(alertController, animated: true)
         })
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === oldPasswordTextField {
+            newPasswordTextField.becomeFirstResponder()
+        } else if textField === newPasswordTextField {
+            confirmPasswordTextField.becomeFirstResponder()
+        } else if textField === confirmPasswordTextField {
+            changePassword()
+        }
+        return true
+    }
+    
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //
 //
