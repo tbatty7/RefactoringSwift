@@ -52,7 +52,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Change Password" id="MX6-aZ-fry">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pcs-nY-wCE"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pcs-nY-wCE">
+                                            <connections>
+                                                <action selector="cancel" destination="MMk-fg-UL4" id="4ka-93-ltk"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>

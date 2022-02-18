@@ -29,6 +29,13 @@ class ChangePasswordViewController: UIViewController {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.color = .white
     }
+    
+    @IBAction private func cancel() {
+        oldPasswordTextField.resignFirstResponder()
+        newPasswordTextField.resignFirstResponder()
+        confirmPasswordTextField.resignFirstResponder()
+        dismiss(animated: true)
+    }
         
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //
