@@ -37,6 +37,34 @@
             </objects>
             <point key="canvasLocation" x="139" y="110"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="MGZ-ux-mM7">
+            <objects>
+                <viewController id="MMk-fg-UL4" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nfa-SG-jw4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuE-Ku-dov">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Change Password" id="MX6-aZ-fry"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hvr-cv-wMo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YuE-Ku-dov" firstAttribute="top" secondItem="hvr-cv-wMo" secondAttribute="top" id="28S-j6-Rgq"/>
+                            <constraint firstItem="YuE-Ku-dov" firstAttribute="trailing" secondItem="hvr-cv-wMo" secondAttribute="trailing" id="t87-Lt-QRQ"/>
+                            <constraint firstItem="YuE-Ku-dov" firstAttribute="leading" secondItem="hvr-cv-wMo" secondAttribute="leading" id="uQ0-ZY-cY5"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Za-ip-1zT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1004" y="110"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
