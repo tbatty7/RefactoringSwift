@@ -23,6 +23,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Change My Password"/>
+                                <connections>
+                                    <segue destination="MMk-fg-UL4" kind="presentation" id="FzA-tJ-7hU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -42,11 +45,11 @@
             <objects>
                 <viewController id="MMk-fg-UL4" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nfa-SG-jw4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuE-Ku-dov">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Change Password" id="MX6-aZ-fry">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pcs-nY-wCE"/>
@@ -54,7 +57,7 @@
                                 </items>
                             </navigationBar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Current Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55x-Zd-xHy">
-                                <rect key="frame" x="20" y="108" width="374" height="44"/>
+                                <rect key="frame" x="20" y="76" width="374" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Cqa-Dk-t8m"/>
                                 </constraints>
@@ -62,7 +65,7 @@
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7D9-JN-3GO">
-                                <rect key="frame" x="20" y="160" width="374" height="44"/>
+                                <rect key="frame" x="20" y="128" width="374" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="emc-hr-Zlg"/>
                                 </constraints>
@@ -70,7 +73,7 @@
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="new-password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dmV-Ny-IUf">
-                                <rect key="frame" x="20" y="212" width="374" height="44"/>
+                                <rect key="frame" x="20" y="180" width="374" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="FDq-S2-CIr"/>
                                 </constraints>
@@ -78,7 +81,7 @@
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="new-password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOU-xd-jWd">
-                                <rect key="frame" x="20" y="272" width="374" height="44"/>
+                                <rect key="frame" x="20" y="240" width="374" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="6Vg-7W-zfI"/>
                                 </constraints>
