@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChangePasswordViewController: UIViewController {
+class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet private(set) var cancelBarButton: UIBarButtonItem!
     @IBOutlet private(set) var oldPasswordTextField: UITextField!
