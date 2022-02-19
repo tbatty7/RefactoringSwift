@@ -19,6 +19,11 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.navigationBar.topItem?.title, "Change Password")
     }
     
+    func test_cancelBarButton_isSystemItemCancel() {
+        let viewController = setUpViewController()
+        let barButtonSystemItem = systemItem(for: viewController.cancelBarButton)
+        XCTAssertEqual(barButtonSystemItem, .cancel)
+    }
     private func setUpViewController() -> ChangePasswordViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
