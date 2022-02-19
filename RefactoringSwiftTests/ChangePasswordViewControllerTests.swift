@@ -14,8 +14,9 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertNotNil(viewController.navigationBar, "navigationBar")
     }
     
-    func test_one() {
-        
+    func test_navigationBar_shouldHaveTitle() {
+        let viewController = setUpViewController()
+        XCTAssertEqual(viewController.navigationBar.topItem?.title, "Change Password")
     }
     
     private func setUpViewController() -> ChangePasswordViewController {
