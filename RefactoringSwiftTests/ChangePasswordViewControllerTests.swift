@@ -122,6 +122,30 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         
         dismissalVerifier.verify(animated: true, dismissedViewController: viewController)
     }
+    
+    func test_tappingSubmit_withOldPasswordEmpty_shouldNotChangePassword() {
+        let viewController = setUpViewController()
+        let mockPasswordChanger = MockPasswordChanger()
+        viewController.passwordChanger = mockPasswordChanger
+        viewController.loadViewIfNeeded()
+        
+        setupValidPasswordEntries(viewController)
+        viewController.oldPasswordTextField.text = ""
+        tap(viewController.submitButton)
+        
+        mockPasswordChanger.verifyChangeNeverCalled()
+    }
+    
+    func test_tappingSubmit_withOldPasswordEmpty_shouldPutFocusOnOldPassword() {
+        let viewController = setUpViewController()
+        
+        setupValidPasswordEntries(viewController)
+        viewController.oldPasswordTextField.text = ""
+        putInViewHeirarchy(viewController)
+        tap(viewController.submitButton)
+
+        XCTAssertTrue(viewController.oldPasswordTextField.isFirstResponder)
+    }
 
     func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
@@ -134,5 +158,11 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         viewController.loadViewIfNeeded()
         
         return viewController
+    }
+    
+    private func setupValidPasswordEntries(_ viewController: ChangePasswordViewController) {
+        viewController.oldPasswordTextField.text = "NON-EMPTY"
+        viewController.newPasswordTextField.text = "123456"
+        viewController.confirmPasswordTextField.text = viewController.newPasswordTextField.text
     }
 }

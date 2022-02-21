@@ -127,3 +127,8 @@ extension UITextContentType: CustomStringConvertible {
         }
     }
 }
+
+func tap(_ button: UIButton) {
+    button.sendActions(for: .touchUpInside)
+}
+
