@@ -21,7 +21,11 @@ class ViewController: UIViewController {
             let changePasswordVC = segue.destination as? ChangePasswordViewController
             changePasswordVC?.securityToken = "TOKEN"
         }
-
     }
+    
+    deinit {
+        print(">>>>>>>> Deinit ViewController")
+    }
+
 }
 

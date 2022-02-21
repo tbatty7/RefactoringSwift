@@ -5,7 +5,6 @@
 //  Created by Timothy D Batty on 2/18/22.
 //
 
-@testable import RefactoringSwift
 import XCTest
 
 func verifyMethodCalledOnce(methodName: String,
@@ -42,12 +41,17 @@ func systemItem(for barButton: UIBarButtonItem) -> UIBarButtonItem.SystemItem {
     return UIBarButtonItem.SystemItem(rawValue: systemItemNumber)!
 }
 
-func setUpViewController() -> ChangePasswordViewController {
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
-    viewController.loadViewIfNeeded()
-    
-    return viewController
+func tap(_ button: UIBarButtonItem) {
+    _ = button.target?.perform(button.action, with: nil)
+}
+
+func putInViewHeirarchy(_ viewController: UIViewController) {
+    let window = UIWindow()
+    window.addSubview(viewController.view)
+}
+
+func executeRunLoop() {
+    RunLoop.current.run(until: Date())
 }
 
 extension UIBarButtonItem.SystemItem: CustomStringConvertible {

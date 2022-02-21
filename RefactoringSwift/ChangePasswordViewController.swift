@@ -37,6 +37,10 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         confirmPasswordTextField.resignFirstResponder()
         dismiss(animated: true)
     }
+    
+    deinit {
+        print(">>>>>>>>>> Deinit ChangePasswordViewController")
+    }
         
     @IBAction private func changePassword() {
         //1. Validate inputs

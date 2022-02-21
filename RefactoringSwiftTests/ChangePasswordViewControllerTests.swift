@@ -79,4 +79,50 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertEqual(textField?.enablesReturnKeyAutomatically, true, "autoEnableReturnKey")
         XCTAssertEqual(textField?.isSecureTextEntry, true, "isSecureTextEntry")
     }
+    
+    func test_cancelButton_removesFocusFromOldPasswordField() {
+            let viewController = setUpViewController()
+            putFocusOn(textField: viewController.oldPasswordTextField, viewController)
+            XCTAssertTrue(viewController.oldPasswordTextField.isFirstResponder, "precondition")
+
+            tap(viewController.cancelBarButton)
+
+            XCTAssertFalse(viewController.oldPasswordTextField.isFirstResponder)
+
+        }
+
+        func test_cancelButton_removesFocusFromNewPasswordField() {
+            let viewController = setUpViewController()
+            putFocusOn(textField: viewController.newPasswordTextField, viewController)
+            XCTAssertTrue(viewController.newPasswordTextField.isFirstResponder, "precondition")
+
+            tap(viewController.cancelBarButton)
+
+            XCTAssertFalse(viewController.newPasswordTextField.isFirstResponder)
+
+        }
+
+        func test_cancelButton_removesFocusFromConfirmPasswordField() {
+            let viewController = setUpViewController()
+            putFocusOn(textField: viewController.confirmPasswordTextField, viewController)
+            XCTAssertTrue(viewController.confirmPasswordTextField.isFirstResponder, "precondition")
+
+            tap(viewController.cancelBarButton)
+
+            XCTAssertFalse(viewController.confirmPasswordTextField.isFirstResponder)
+
+        }
+
+        func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
+            putInViewHeirarchy(viewController)
+            textField.becomeFirstResponder()
+        }
+
+        func setUpViewController() -> ChangePasswordViewController {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
+            viewController.loadViewIfNeeded()
+
+            return viewController
+        }
 }
