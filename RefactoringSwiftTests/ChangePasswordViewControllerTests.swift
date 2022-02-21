@@ -184,6 +184,29 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.newPasswordTextField.isFirstResponder, true)
     }
     
+    func test_tappingSubmit_whenNewPasswordTooShort_shouldNotChangePassword() {
+        let viewController = setUpViewController()
+        let mockPasswordChanger = MockPasswordChanger()
+        viewController.passwordChanger = mockPasswordChanger
+        viewController.loadViewIfNeeded()
+        let alertVerifier = AlertVerifier()
+        
+        setupPasswordEntriesNewPasswordTooShort(viewController)
+        tap(viewController.submitButton)
+        
+        mockPasswordChanger.verifyChangeNeverCalled()
+    }
+    
+    func test_tappingSubmit_whenNewPasswordTooShort_shouldShowTooShortAlert() {
+        let viewController = setUpViewController()
+        let alertVerifier = AlertVerifier()
+        
+        setupPasswordEntriesNewPasswordTooShort(viewController)
+        tap(viewController.submitButton)
+        
+        verifyAlertPresented(viewController, alertVerifier: alertVerifier, message: "The new password should have at least 6 characters.")
+    }
+    
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
@@ -200,6 +223,12 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     private func setupValidPasswordEntries(_ viewController: ChangePasswordViewController) {
         viewController.oldPasswordTextField.text = "NON-EMPTY"
         viewController.newPasswordTextField.text = "123456"
+        viewController.confirmPasswordTextField.text = viewController.newPasswordTextField.text
+    }
+    
+    private func setupPasswordEntriesNewPasswordTooShort(_ viewController: ChangePasswordViewController) {
+        viewController.oldPasswordTextField.text = "NON-EMPTY"
+        viewController.newPasswordTextField.text = "12345"
         viewController.confirmPasswordTextField.text = viewController.newPasswordTextField.text
     }
     
