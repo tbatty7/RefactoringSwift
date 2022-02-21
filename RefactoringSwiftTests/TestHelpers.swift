@@ -5,6 +5,7 @@
 //  Created by Timothy D Batty on 2/18/22.
 //
 
+@testable import RefactoringSwift
 import XCTest
 
 func verifyMethodCalledOnce(methodName: String,
@@ -39,6 +40,14 @@ func verifyMethodNeverCalled(methodName: String,
 func systemItem(for barButton: UIBarButtonItem) -> UIBarButtonItem.SystemItem {
     let systemItemNumber = barButton.value(forKey: "systemItem") as! Int
     return UIBarButtonItem.SystemItem(rawValue: systemItemNumber)!
+}
+
+func setUpViewController() -> ChangePasswordViewController {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
+    viewController.loadViewIfNeeded()
+    
+    return viewController
 }
 
 extension UIBarButtonItem.SystemItem: CustomStringConvertible {
@@ -96,6 +105,21 @@ extension UIBarButtonItem.SystemItem: CustomStringConvertible {
             return "close"
         @unknown default:
             fatalError("Unknown UIBarButtonItem.SystemItem ")
+        }
+    }
+}
+
+extension UITextContentType: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .password:
+            return "password"
+        case .newPassword:
+            return "new-password"
+        case .username:
+            return "username"
+        default:
+            return "check storyboard"
         }
     }
 }
