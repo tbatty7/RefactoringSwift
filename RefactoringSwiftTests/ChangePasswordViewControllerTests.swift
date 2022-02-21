@@ -171,6 +171,19 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         verifyAlertPresented(viewController, alertVerifier: alertVerifier, message: "Please enter a new password.")
     }
 
+    func test_tappingOkPasswordBlankAlert_shouldPutFocusOnNewPassword() throws {
+        let viewController = setUpViewController()
+        let alertVerifier = AlertVerifier()
+        setupValidPasswordEntries(viewController)
+        viewController.newPasswordTextField.text = ""
+        
+        tap(viewController.submitButton)
+        putInViewHeirarchy(viewController)
+            
+        try alertVerifier.executeAction(forButton: "OK")
+        XCTAssertEqual(viewController.newPasswordTextField.isFirstResponder, true)
+    }
+    
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
