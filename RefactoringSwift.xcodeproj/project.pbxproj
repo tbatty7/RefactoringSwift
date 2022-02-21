@@ -19,6 +19,8 @@
 		2234307727C042AA00A485F9 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2234307627C042AA00A485F9 /* TestHelpers.swift */; };
 		2234307927C0455D00A485F9 /* MockPasswordChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2234307827C0455D00A485F9 /* MockPasswordChanger.swift */; };
 		2234307B27C05E8800A485F9 /* ChangePasswordViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2234307A27C05E8800A485F9 /* ChangePasswordViewControllerTests.swift */; };
+		225C7A1927C422CE00CB031F /* ViewControllerPresentationSpy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225C7A1827C422CE00CB031F /* ViewControllerPresentationSpy.xcframework */; };
+		225C7A1B27C422E300CB031F /* ViewControllerPresentationSpy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 225C7A1827C422CE00CB031F /* ViewControllerPresentationSpy.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +32,19 @@
 			remoteInfo = RefactoringSwift;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		225C7A1A27C422DB00CB031F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				225C7A1B27C422E300CB031F /* ViewControllerPresentationSpy.xcframework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2234303D27C008F500A485F9 /* RefactoringSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RefactoringSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +62,7 @@
 		2234307627C042AA00A485F9 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		2234307827C0455D00A485F9 /* MockPasswordChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPasswordChanger.swift; sourceTree = "<group>"; };
 		2234307A27C05E8800A485F9 /* ChangePasswordViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewControllerTests.swift; sourceTree = "<group>"; };
+		225C7A1827C422CE00CB031F /* ViewControllerPresentationSpy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ViewControllerPresentationSpy.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				225C7A1927C422CE00CB031F /* ViewControllerPresentationSpy.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +121,7 @@
 		2234305627C008F600A485F9 /* RefactoringSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				225C7A1827C422CE00CB031F /* ViewControllerPresentationSpy.xcframework */,
 				2234307027C0092000A485F9 /* ViewControllerTests.swift */,
 				2234307627C042AA00A485F9 /* TestHelpers.swift */,
 				2234307827C0455D00A485F9 /* MockPasswordChanger.swift */,
@@ -139,6 +157,7 @@
 				2234304F27C008F600A485F9 /* Sources */,
 				2234305027C008F600A485F9 /* Frameworks */,
 				2234305127C008F600A485F9 /* Resources */,
+				225C7A1A27C422DB00CB031F /* CopyFiles */,
 			);
 			buildRules = (
 			);
