@@ -246,6 +246,66 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.newPasswordTextField.isFirstResponder, true)
     }
     
+    func test_tappingSubmit_withConfirmationMismatch_shouldNotChangePassword() {
+        let viewController = setUpViewController()
+        let passwordChanger = MockPasswordChanger()
+        viewController.passwordChanger = passwordChanger
+        
+        setupPasswordEntriesPasswordConfirmationMismatch(viewController)
+        tap(viewController.submitButton)
+        
+        passwordChanger.verifyChangeNeverCalled()
+    }
+    
+    func test_tappingSubmit_withConfirmationMismatch_shouldShowMismatchAlert() {
+        let viewController = setUpViewController()
+        let alertVerifier = AlertVerifier()
+        viewController.loadViewIfNeeded()
+        
+        setupPasswordEntriesPasswordConfirmationMismatch(viewController)
+        tap(viewController.submitButton)
+        
+        verifyAlertPresented(viewController, alertVerifier: alertVerifier, message: "The new password and the confirmation password don't match. Please try again")
+    }
+    
+    func test_tappingOkInMismatchAlert_shouldClearNewAndConfirmationPasswords() throws {
+        let viewController = setUpViewController()
+        let alertVerifier = AlertVerifier()
+        setupPasswordEntriesPasswordConfirmationMismatch(viewController)
+        
+        tap(viewController.submitButton)
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(viewController.newPasswordTextField.text?.isEmpty, true, "new")
+        XCTAssertEqual(viewController.confirmPasswordTextField.text?.isEmpty, true, "confirmation")
+    }
+    
+    func test_tappingOkInMismatchAlert_shouldNotClearOldPassword() throws {
+        let viewController = setUpViewController()
+        let alertVerifier = AlertVerifier()
+        setupPasswordEntriesPasswordConfirmationMismatch(viewController)
+        
+        tap(viewController.submitButton)
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(viewController.oldPasswordTextField.text?.isEmpty, false)
+    }
+    
+    func test_tappingOkInMismatchAlert_shouldPutFocusInNewPassword() throws {
+        let viewController = setUpViewController()
+        let alertVerifier = AlertVerifier()
+        setupPasswordEntriesPasswordConfirmationMismatch(viewController)
+        
+        tap(viewController.submitButton)
+        putInViewHeirarchy(viewController)
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(viewController.newPasswordTextField.isFirstResponder, true)
+    }
+    
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
@@ -269,6 +329,12 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         viewController.oldPasswordTextField.text = "NON-EMPTY"
         viewController.newPasswordTextField.text = "12345"
         viewController.confirmPasswordTextField.text = viewController.newPasswordTextField.text
+    }
+    
+    private func setupPasswordEntriesPasswordConfirmationMismatch(_ viewController: ChangePasswordViewController) {
+        viewController.oldPasswordTextField.text = "NON-EMPTY"
+        viewController.newPasswordTextField.text = "123456"
+        viewController.confirmPasswordTextField.text = "Not-123456"
     }
     
     private func verifyAlertPresented(_ viewController: ChangePasswordViewController,
