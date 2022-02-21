@@ -1,5 +1,6 @@
 @testable import RefactoringSwift
 import XCTest
+import ViewControllerPresentationSpy
 
 final class ChangePasswordViewControllerTests: XCTestCase {
 
@@ -91,38 +92,47 @@ final class ChangePasswordViewControllerTests: XCTestCase {
 
         }
 
-        func test_cancelButton_removesFocusFromNewPasswordField() {
-            let viewController = setUpViewController()
-            putFocusOn(textField: viewController.newPasswordTextField, viewController)
-            XCTAssertTrue(viewController.newPasswordTextField.isFirstResponder, "precondition")
+    func test_cancelButton_removesFocusFromNewPasswordField() {
+        let viewController = setUpViewController()
+        putFocusOn(textField: viewController.newPasswordTextField, viewController)
+        XCTAssertTrue(viewController.newPasswordTextField.isFirstResponder, "precondition")
+        
+        tap(viewController.cancelBarButton)
+        
+        XCTAssertFalse(viewController.newPasswordTextField.isFirstResponder)
+        
+    }
+    
+    func test_cancelButton_removesFocusFromConfirmPasswordField() {
+        let viewController = setUpViewController()
+        putFocusOn(textField: viewController.confirmPasswordTextField, viewController)
+        XCTAssertTrue(viewController.confirmPasswordTextField.isFirstResponder, "precondition")
+        
+        tap(viewController.cancelBarButton)
+        
+        XCTAssertFalse(viewController.confirmPasswordTextField.isFirstResponder)
+        
+    }
+    
+    func test_tappingCancel_shouldDismissModal() {
+        let viewController = setUpViewController()
+        let dismissalVerifier = DismissalVerifier()
+        
+        tap(viewController.cancelBarButton)
+        
+        dismissalVerifier.verify(animated: true, dismissedViewController: viewController)
+    }
 
-            tap(viewController.cancelBarButton)
-
-            XCTAssertFalse(viewController.newPasswordTextField.isFirstResponder)
-
-        }
-
-        func test_cancelButton_removesFocusFromConfirmPasswordField() {
-            let viewController = setUpViewController()
-            putFocusOn(textField: viewController.confirmPasswordTextField, viewController)
-            XCTAssertTrue(viewController.confirmPasswordTextField.isFirstResponder, "precondition")
-
-            tap(viewController.cancelBarButton)
-
-            XCTAssertFalse(viewController.confirmPasswordTextField.isFirstResponder)
-
-        }
-
-        func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
-            putInViewHeirarchy(viewController)
-            textField.becomeFirstResponder()
-        }
-
-        func setUpViewController() -> ChangePasswordViewController {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
-            viewController.loadViewIfNeeded()
-
-            return viewController
-        }
+    func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
+        putInViewHeirarchy(viewController)
+        textField.becomeFirstResponder()
+    }
+    
+    func setUpViewController() -> ChangePasswordViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
+        viewController.loadViewIfNeeded()
+        
+        return viewController
+    }
 }
