@@ -89,7 +89,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
             tap(viewController.cancelBarButton)
 
             XCTAssertFalse(viewController.oldPasswordTextField.isFirstResponder)
-
+            executeRunLoop()
         }
 
     func test_cancelButton_removesFocusFromNewPasswordField() {
@@ -100,7 +100,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         tap(viewController.cancelBarButton)
         
         XCTAssertFalse(viewController.newPasswordTextField.isFirstResponder)
-        
+        executeRunLoop()
     }
     
     func test_cancelButton_removesFocusFromConfirmPasswordField() {
@@ -111,7 +111,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         tap(viewController.cancelBarButton)
         
         XCTAssertFalse(viewController.confirmPasswordTextField.isFirstResponder)
-        
+        executeRunLoop()
     }
     
     func test_tappingCancel_shouldDismissModal() {
@@ -145,6 +145,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         tap(viewController.submitButton)
 
         XCTAssertTrue(viewController.oldPasswordTextField.isFirstResponder)
+        executeRunLoop()
     }
     
     func test_tappingSubmit_withNewPasswordEmpty_shouldNotChangePassword() {
@@ -205,6 +206,44 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         tap(viewController.submitButton)
         
         verifyAlertPresented(viewController, alertVerifier: alertVerifier, message: "The new password should have at least 6 characters.")
+    }
+    
+    func test_tappingOkInTooShortAlert_shouldClearNewAndConfirmationPasswords() throws {
+        let viewController = setUpViewController()
+        let alertVerifier = AlertVerifier()
+        setupPasswordEntriesNewPasswordTooShort(viewController)
+        
+        tap(viewController.submitButton)
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(viewController.newPasswordTextField.text?.isEmpty, true, "new")
+        XCTAssertEqual(viewController.confirmPasswordTextField.text?.isEmpty, true, "confirmation")
+    }
+    
+    func test_tappingOkInTooShortAlert_shouldNotClearOldPassword() throws {
+        let viewController = setUpViewController()
+        let alertVerifier = AlertVerifier()
+        setupPasswordEntriesNewPasswordTooShort(viewController)
+        
+        tap(viewController.submitButton)
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(viewController.oldPasswordTextField.text?.isEmpty, false)
+    }
+    
+    func test_tappingOkInTooShortAlert_shouldPutFocusInNewPassword() throws {
+        let viewController = setUpViewController()
+        let alertVerifier = AlertVerifier()
+        setupPasswordEntriesNewPasswordTooShort(viewController)
+        
+        tap(viewController.submitButton)
+        putInViewHeirarchy(viewController)
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(viewController.newPasswordTextField.isFirstResponder, true)
     }
     
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
