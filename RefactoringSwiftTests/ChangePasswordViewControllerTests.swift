@@ -146,13 +146,37 @@ final class ChangePasswordViewControllerTests: XCTestCase {
 
         XCTAssertTrue(viewController.oldPasswordTextField.isFirstResponder)
     }
+    
+    func test_tappingSubmit_withNewPasswordEmpty_shouldNotChangePassword() {
+        let viewController = setUpViewController()
+        let mockPasswordChanger = MockPasswordChanger()
+        viewController.passwordChanger = mockPasswordChanger
+        viewController.loadViewIfNeeded()
+        
+        setupValidPasswordEntries(viewController)
+        viewController.oldPasswordTextField.text = ""
+        tap(viewController.submitButton)
+        
+        mockPasswordChanger.verifyChangeNeverCalled()
+    }
+    
+    func test_tappingSubmit_withNewPasswordEmpty_shouldShowPasswordBlankAlert() {
+        let viewController = setUpViewController()
+        let alertVerifier = AlertVerifier()
+        setupValidPasswordEntries(viewController)
+        viewController.newPasswordTextField.text = ""
+        
+        tap(viewController.submitButton)
+        
+        verifyAlertPresented(viewController, alertVerifier: alertVerifier, message: "Please enter a new password.")
+    }
 
-    func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
+    private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
     }
     
-    func setUpViewController() -> ChangePasswordViewController {
+    private func setUpViewController() -> ChangePasswordViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
         viewController.loadViewIfNeeded()
@@ -164,5 +188,17 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         viewController.oldPasswordTextField.text = "NON-EMPTY"
         viewController.newPasswordTextField.text = "123456"
         viewController.confirmPasswordTextField.text = viewController.newPasswordTextField.text
+    }
+    
+    private func verifyAlertPresented(_ viewController: ChangePasswordViewController,
+                                      alertVerifier: AlertVerifier,
+                                      message: String, file: StaticString = #file, line: UInt = #line ) {
+        alertVerifier.verify(title: nil,
+                             message: message,
+                             animated: true,
+                             actions: [.default("OK"),],
+                             presentingViewController: viewController,
+                             file: file, line: line)
+        XCTAssertEqual(alertVerifier.preferredAction?.title, "OK", "preferredAction", file: file, line: line)
     }
 }
