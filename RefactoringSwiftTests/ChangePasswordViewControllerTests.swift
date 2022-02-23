@@ -393,6 +393,22 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.view.backgroundColor, .clear)
     }
     
+    func test_tappingSubmit_withValidFields_shouldRequestChangePassword() {
+        let viewController = setUpViewController()
+        let passwordChanger = MockPasswordChanger()
+        viewController.passwordChanger = passwordChanger
+        viewController.loadViewIfNeeded()
+        
+        viewController.oldPasswordTextField.text = "Not-Empty"
+        viewController.securityToken = "SecurityToken"
+        viewController.newPasswordTextField.text = "123456"
+        viewController.confirmPasswordTextField.text = viewController.newPasswordTextField.text
+        
+        tap(viewController.submitButton)
+        
+        passwordChanger.verifyChange(securityToken: "SecurityToken", oldPassword: "Not-Empty", newPassword: "123456")
+    }
+    
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
