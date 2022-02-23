@@ -87,21 +87,7 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        //2. Setup waiting appearance
-        oldPasswordTextField.resignFirstResponder()
-        newPasswordTextField.resignFirstResponder()
-        confirmPasswordTextField.resignFirstResponder()
-        cancelBarButton.isEnabled = false
-        view.backgroundColor = .clear
-        view.addSubview(blurView)
-        view.addSubview(activityIndicator)
-        NSLayoutConstraint.activate([
-            blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
-            blurView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        activityIndicator.startAnimating()
+        setupWaitingAppearance()
         
         attemptToChangePassword()
     }
@@ -151,6 +137,23 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
             alertController.preferredAction = okButton
             self?.present(alertController, animated: true)
         })
+    }
+    
+    private func setupWaitingAppearance() {
+        oldPasswordTextField.resignFirstResponder()
+        newPasswordTextField.resignFirstResponder()
+        confirmPasswordTextField.resignFirstResponder()
+        cancelBarButton.isEnabled = false
+        view.backgroundColor = .clear
+        view.addSubview(blurView)
+        view.addSubview(activityIndicator)
+        NSLayoutConstraint.activate([
+            blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            blurView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        activityIndicator.startAnimating()
     }
 
 }
