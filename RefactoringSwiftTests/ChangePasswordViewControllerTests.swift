@@ -475,6 +475,39 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertNil(viewController.activityIndicator.superview)
     }
     
+    func test_changePasswordSuccess_shouldShowSuccessAlert() {
+        let viewController = setUpViewController()
+        let passwordChanger = MockPasswordChanger()
+        viewController.passwordChanger = passwordChanger
+        let alertVerifier = AlertVerifier()
+        viewController.loadViewIfNeeded()
+        
+        setupValidPasswordEntries(viewController)
+        tap(viewController.submitButton)
+        
+        passwordChanger.changeCallSuccess()
+        
+        verifyAlertPresented(viewController, alertVerifier: alertVerifier, message: "Your password has been successfully changed")
+    }
+    
+    func test_tappingOkInSuccessModal_shouldDismissModal() throws {
+        let viewController = setUpViewController()
+        let passwordChanger = MockPasswordChanger()
+        viewController.passwordChanger = passwordChanger
+        let alertVerifier = AlertVerifier()
+        viewController.loadViewIfNeeded()
+        
+        setupValidPasswordEntries(viewController)
+        tap(viewController.submitButton)
+        
+        passwordChanger.changeCallSuccess()
+        
+        let dismissalVerifier = DismissalVerifier()
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        dismissalVerifier.verify(animated: true, dismissedViewController: viewController)
+    }
+    
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
