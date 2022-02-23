@@ -409,6 +409,72 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         passwordChanger.verifyChange(securityToken: "SecurityToken", oldPassword: "Not-Empty", newPassword: "123456")
     }
     
+    func test_changePasswordSuccess_shouldStopActivityIndicatorAnimation() {
+        let viewController = setUpViewController()
+        let passwordChanger = MockPasswordChanger()
+        viewController.passwordChanger = passwordChanger
+        viewController.loadViewIfNeeded()
+        
+        setupValidPasswordEntries(viewController)
+        tap(viewController.submitButton)
+        
+        XCTAssertEqual(viewController.activityIndicator.isAnimating, true, "precondition")
+        
+        passwordChanger.changeCallSuccess()
+        
+        XCTAssertEqual(viewController.activityIndicator.isAnimating, false)
+    }
+    
+    func test_changePasswordSuccess_shouldHideActivityIndicator() {
+        let viewController = setUpViewController()
+        let passwordChanger = MockPasswordChanger()
+        viewController.passwordChanger = passwordChanger
+        viewController.loadViewIfNeeded()
+        
+        setupValidPasswordEntries(viewController)
+        tap(viewController.submitButton)
+        
+        XCTAssertNotNil(viewController.activityIndicator.superview, "precondition")
+        
+        passwordChanger.changeCallSuccess()
+        
+        XCTAssertNil(viewController.activityIndicator.superview)
+    }
+    
+    
+    
+    func test_changePasswordFailure_shouldStopActivityIndicatorAnimation() {
+        let viewController = setUpViewController()
+        let passwordChanger = MockPasswordChanger()
+        viewController.passwordChanger = passwordChanger
+        viewController.loadViewIfNeeded()
+        
+        setupValidPasswordEntries(viewController)
+        tap(viewController.submitButton)
+        
+        XCTAssertEqual(viewController.activityIndicator.isAnimating, true, "precondition")
+        
+        passwordChanger.changeCallFailure(message: "Oh noes!")
+        
+        XCTAssertEqual(viewController.activityIndicator.isAnimating, false)
+    }
+    
+    func test_changePasswordFailure_shouldHideActivityIndicator() {
+        let viewController = setUpViewController()
+        let passwordChanger = MockPasswordChanger()
+        viewController.passwordChanger = passwordChanger
+        viewController.loadViewIfNeeded()
+
+        setupValidPasswordEntries(viewController)
+        tap(viewController.submitButton)
+
+        XCTAssertNotNil(viewController.activityIndicator.superview, "precondition")
+
+        passwordChanger.changeCallFailure(message: "Oh Noes!")
+
+        XCTAssertNil(viewController.activityIndicator.superview)
+    }
+    
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
