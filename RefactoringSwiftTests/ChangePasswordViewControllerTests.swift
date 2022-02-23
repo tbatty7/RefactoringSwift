@@ -306,6 +306,42 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.newPasswordTextField.isFirstResponder, true)
     }
     
+    func test_tappingSubmit_withValidFieldsFocusedOnOldPassword_resignsFocus() {
+        let viewController = setUpViewController()
+        setupValidPasswordEntries(viewController)
+        putFocusOn(textField: viewController.oldPasswordTextField, viewController)
+        XCTAssertEqual(viewController.oldPasswordTextField.isFirstResponder, true, "precondition")
+        
+        tap(viewController.submitButton)
+        
+        XCTAssertEqual(viewController.oldPasswordTextField.isFirstResponder, false)
+        executeRunLoop()
+    }
+    
+    func test_tappingSubmit_withValidFieldsFocusedOnNewPassword_resignsFocus() {
+        let viewController = setUpViewController()
+        setupValidPasswordEntries(viewController)
+        putFocusOn(textField: viewController.newPasswordTextField, viewController)
+        XCTAssertEqual(viewController.newPasswordTextField.isFirstResponder, true, "precondition")
+        
+        tap(viewController.submitButton)
+        
+        XCTAssertEqual(viewController.newPasswordTextField.isFirstResponder, false)
+        executeRunLoop()
+    }
+    
+    func test_tappingSubmit_withValidFieldsFocusedOnConfirmPassword_resignsFocus() {
+        let viewController = setUpViewController()
+        setupValidPasswordEntries(viewController)
+        putFocusOn(textField: viewController.confirmPasswordTextField, viewController)
+        XCTAssertEqual(viewController.confirmPasswordTextField.isFirstResponder, true, "precondition")
+        
+        tap(viewController.submitButton)
+        
+        XCTAssertEqual(viewController.confirmPasswordTextField.isFirstResponder, false)
+        executeRunLoop()
+    }
+    
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
