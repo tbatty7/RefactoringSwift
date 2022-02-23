@@ -41,7 +41,7 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     deinit {
         print(">>>>>>>>>> Deinit ChangePasswordViewController")
     }
-        
+    
     @IBAction private func changePassword() {
         //1. Validate inputs
         if oldPasswordTextField.text?.isEmpty ?? true {
@@ -103,7 +103,21 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         ])
         activityIndicator.startAnimating()
         
-        //3. Attempt to change password
+        attemptToChangePassword()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === oldPasswordTextField {
+            newPasswordTextField.becomeFirstResponder()
+        } else if textField === newPasswordTextField {
+            confirmPasswordTextField.becomeFirstResponder()
+        } else if textField === confirmPasswordTextField {
+            changePassword()
+        }
+        return true
+    }
+    
+    private func attemptToChangePassword() {
         passwordChanger.change(securityToken: securityToken,
                                oldPassword: oldPasswordTextField.text ?? "",
                                newPassword: newPasswordTextField.text ?? "",
@@ -137,17 +151,6 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
             alertController.preferredAction = okButton
             self?.present(alertController, animated: true)
         })
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField === oldPasswordTextField {
-            newPasswordTextField.becomeFirstResponder()
-        } else if textField === newPasswordTextField {
-            confirmPasswordTextField.becomeFirstResponder()
-        } else if textField === confirmPasswordTextField {
-            changePassword()
-        }
-        return true
     }
 
 }
