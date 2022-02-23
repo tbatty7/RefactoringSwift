@@ -485,13 +485,104 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         
         setupValidPasswordEntries(viewController)
         tap(viewController.submitButton)
-        
         passwordChanger.changeCallSuccess()
         
         let dismissalVerifier = DismissalVerifier()
         try alertVerifier.executeAction(forButton: "OK")
         
         dismissalVerifier.verify(animated: true, dismissedViewController: viewController)
+    }
+    
+    func test_changePasswordFailure_shouldShowFailureAlertWithGivenMessage() {
+        let viewController = setUpViewController()
+        let passwordChanger = setupMockPasswordChanger(viewController)
+        let alertVerifier = AlertVerifier()
+
+        showPasswordChangeFailureAlert(viewController, passwordChanger)
+        
+        verifyAlertPresented(viewController, alertVerifier: alertVerifier, message: "Useful Message")
+    }
+    
+    func test_tappingOkInFailureAlert_shouldClearAllFieldsToStartOver() throws {
+        let viewController = setUpViewController()
+        let passwordChanger = setupMockPasswordChanger(viewController)
+        let alertVerifier = AlertVerifier()
+        showPasswordChangeFailureAlert(viewController, passwordChanger)
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(viewController.oldPasswordTextField.text?.isEmpty, true, "oldPassword")
+        XCTAssertEqual(viewController.newPasswordTextField.text?.isEmpty, true, "newPassword")
+        XCTAssertEqual(viewController.confirmPasswordTextField.text?.isEmpty, true, "confirmPassword")
+    }
+    
+    func test_tappingOkInFailureAlert_shouldPutFocusOnOldPassword() throws {
+        let viewController = setUpViewController()
+        let passwordChanger = setupMockPasswordChanger(viewController)
+        let alertVerifier = AlertVerifier()
+        showPasswordChangeFailureAlert(viewController, passwordChanger)
+        putInViewHeirarchy(viewController)
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(viewController.oldPasswordTextField.isFirstResponder, true)
+        executeRunLoop()
+    }
+    
+    func test_tappingOkInFailureAlert_shouldSetBackgroundBackToWhite() throws {
+        let viewController = setUpViewController()
+        let passwordChanger = setupMockPasswordChanger(viewController)
+        let alertVerifier = AlertVerifier()
+        showPasswordChangeFailureAlert(viewController, passwordChanger)
+        XCTAssertNotEqual(viewController.view.backgroundColor, .white, "precondition")
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(viewController.view.backgroundColor, .white)
+    }
+    
+    func test_tappingOkInFailureAlert_shouldHideBlur() throws {
+        let viewController = setUpViewController()
+        let passwordChanger = setupMockPasswordChanger(viewController)
+        let alertVerifier = AlertVerifier()
+        showPasswordChangeFailureAlert(viewController, passwordChanger)
+        
+        XCTAssertNotNil(viewController.blurView.superview, "precondition")
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertNil(viewController.blurView.superview)
+    }
+    
+    func test_tappingOkInFailureAlert_shouldEnableCancelBarButton() throws {
+        let viewController = setUpViewController()
+        let passwordChanger = setupMockPasswordChanger(viewController)
+        let alertVerifier = AlertVerifier()
+        showPasswordChangeFailureAlert(viewController, passwordChanger)
+        
+        XCTAssertEqual(viewController.cancelBarButton.isEnabled, false, "precondition")
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(viewController.cancelBarButton.isEnabled, true)
+    }
+    
+    func test_tappingOkInFailureAlert_shouldNotDismissModal() throws {
+        let viewController = setUpViewController()
+        let passwordChanger = setupMockPasswordChanger(viewController)
+        let alertVerifier = AlertVerifier()
+        showPasswordChangeFailureAlert(viewController, passwordChanger)
+        let dismissalVerifier = DismissalVerifier()
+        
+        try alertVerifier.executeAction(forButton: "OK")
+        
+        XCTAssertEqual(dismissalVerifier.dismissedCount, 0)
+    }
+    
+    private func showPasswordChangeFailureAlert(_ viewController: ChangePasswordViewController, _ passwordChanger: MockPasswordChanger) {
+        setupValidPasswordEntries(viewController)
+        tap(viewController.submitButton)
+        passwordChanger.changeCallFailure(message: "Useful Message")
     }
     
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
