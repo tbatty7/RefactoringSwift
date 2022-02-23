@@ -71,21 +71,17 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
                                onSuccess: {[weak self] in
             self?.activityIndicator.stopAnimating()
             self?.activityIndicator.removeFromSuperview()
-            let alertController = UIAlertController(title: nil,
-                                                    message: "Your password has been successfully changed",
-                                                    preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            
+            self?.showAlert(message: "Your password has been successfully changed",
+                      okAction: { [weak self] _ in
                 self?.dismiss(animated: true)
-            }
-            alertController.addAction(okButton)
-            alertController.preferredAction = okButton
-            self?.present(alertController, animated: true)
+            })
         },
                                onFailure: {[weak self] message in
             self?.activityIndicator.stopAnimating()
             self?.activityIndicator.removeFromSuperview()
-            let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            
+            self?.showAlert(message: message, okAction: { [weak self] _ in
                 self?.oldPasswordTextField.text = ""
                 self?.newPasswordTextField.text = ""
                 self?.confirmPasswordTextField.text = ""
@@ -93,10 +89,7 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
                 self?.view.backgroundColor = .white
                 self?.blurView.removeFromSuperview()
                 self?.cancelBarButton.isEnabled = true
-            }
-            alertController.addAction(okButton)
-            alertController.preferredAction = okButton
-            self?.present(alertController, animated: true)
+            })
         })
     }
     
@@ -132,29 +125,24 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         }
         
         if newPasswordTextField.text?.count ?? 0 < 6 {
-            let alertController = UIAlertController(title: nil, message: "The new password should have at least 6 characters.", preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            showAlert(message: "The new password should have at least 6 characters.",
+                      okAction: { [weak self] _ in
                 self?.newPasswordTextField.text = ""
                 self?.confirmPasswordTextField.text = ""
                 self?.newPasswordTextField.becomeFirstResponder()
-            }
-            alertController.addAction(okButton)
-            alertController.preferredAction = okButton
-            present(alertController, animated: true)
+            })
+            
             return false
         }
         
         if newPasswordTextField.text != confirmPasswordTextField.text {
-            let alertController = UIAlertController(title: nil, message: "The new password and the confirmation password " +
-                                                    "don't match. Please try again", preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            let message = "The new password and the confirmation password " +
+            "don't match. Please try again"
+            showAlert(message: message, okAction: { [weak self] _ in
                 self?.newPasswordTextField.text = ""
                 self?.confirmPasswordTextField.text = ""
                 self?.newPasswordTextField.becomeFirstResponder()
-            }
-            alertController.addAction(okButton)
-            alertController.preferredAction = okButton
-            present(alertController, animated: true)
+            })
             return false
         }
         return true
