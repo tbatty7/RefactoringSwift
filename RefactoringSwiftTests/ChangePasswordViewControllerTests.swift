@@ -383,6 +383,16 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.activityIndicator.isAnimating, true)
     }
     
+    func test_tappingSubmit_withValidFields_shouldClearBackgroundColorForBlur() {
+        let viewController = setUpViewController()
+        setupValidPasswordEntries(viewController)
+        XCTAssertNotEqual(viewController.view.backgroundColor, .clear, "precondition")
+        
+        tap(viewController.submitButton)
+        
+        XCTAssertEqual(viewController.view.backgroundColor, .clear)
+    }
+    
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
