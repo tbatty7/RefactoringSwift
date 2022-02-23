@@ -579,6 +579,66 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertEqual(dismissalVerifier.dismissedCount, 0)
     }
     
+    func test_textFieldDelegates_shouldBeConnected() {
+        let viewController = setUpViewController()
+        XCTAssertNotNil(viewController.oldPasswordTextField.delegate, "oldPassword")
+        XCTAssertNotNil(viewController.newPasswordTextField.delegate, "newPassword")
+        XCTAssertNotNil(viewController.confirmPasswordTextField.delegate, "confirmPassword")
+    }
+    
+    func test_hittingReturnFromOldPassword_shouldPutFocusOnNewPassword() {
+        let viewController = setUpViewController()
+        putInViewHeirarchy(viewController)
+        
+        shouldReturn(in: viewController.oldPasswordTextField)
+        
+        XCTAssertEqual(viewController.newPasswordTextField.isFirstResponder, true)
+        executeRunLoop()
+    }
+    
+    func test_hittingReturnFromNewPassword_shouldPutFocusOnConfirmPassword() {
+        let viewController = setUpViewController()
+        putInViewHeirarchy(viewController)
+        
+        shouldReturn(in: viewController.newPasswordTextField)
+        
+        XCTAssertEqual(viewController.confirmPasswordTextField.isFirstResponder, true)
+        executeRunLoop()
+    }
+    
+    func test_hittingReturnFromConfirmPassword_shouldFireOffChangePasswordRequest() {
+        let viewController = setUpViewController()
+        let passwordChanger = setupMockPasswordChanger(viewController)
+        viewController.securityToken = "securityToken"
+        viewController.oldPasswordTextField.text = "notEmpty"
+        viewController.newPasswordTextField.text = "123456"
+        viewController.confirmPasswordTextField.text = viewController.newPasswordTextField.text
+                
+        shouldReturn(in: viewController.confirmPasswordTextField)
+        
+        passwordChanger.verifyChange(securityToken: "securityToken", oldPassword: "notEmpty", newPassword: "123456")
+    }
+    
+    func test_hittingReturnFromOldPassword_shouldNotRequestPasswordChange() {
+        let viewController = setUpViewController()
+        let passwordChanger = setupMockPasswordChanger(viewController)
+        setupValidPasswordEntries(viewController)
+        
+        shouldReturn(in: viewController.oldPasswordTextField)
+        
+        passwordChanger.verifyChangeNeverCalled()
+    }
+    
+    func test_hittingReturnFromNewPassword_shouldNotRequestPasswordChange() {
+        let viewController = setUpViewController()
+        let passwordChanger = setupMockPasswordChanger(viewController)
+        setupValidPasswordEntries(viewController)
+        
+        shouldReturn(in: viewController.newPasswordTextField)
+        
+        passwordChanger.verifyChangeNeverCalled()
+    }
+    
     private func showPasswordChangeFailureAlert(_ viewController: ChangePasswordViewController, _ passwordChanger: MockPasswordChanger) {
         setupValidPasswordEntries(viewController)
         tap(viewController.submitButton)

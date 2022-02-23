@@ -54,6 +54,14 @@ func executeRunLoop() {
     RunLoop.current.run(until: Date())
 }
 
+func tap(_ button: UIButton) {
+    button.sendActions(for: .touchUpInside)
+}
+
+@discardableResult func shouldReturn(in textField: UITextField) -> Bool? {
+    textField.delegate?.textFieldShouldReturn?(textField)
+}
+
 extension UIBarButtonItem.SystemItem: CustomStringConvertible {
     public var description: String {
         switch self {
@@ -126,9 +134,5 @@ extension UITextContentType: CustomStringConvertible {
             return "check storyboard"
         }
     }
-}
-
-func tap(_ button: UIButton) {
-    button.sendActions(for: .touchUpInside)
 }
 
