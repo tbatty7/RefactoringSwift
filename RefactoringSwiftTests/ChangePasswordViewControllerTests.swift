@@ -353,6 +353,36 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.cancelBarButton.isEnabled, false)
     }
     
+    func test_tappingSubmit_withValidFields_shouldShowBlurredView() {
+        let viewController = setUpViewController()
+        setupValidPasswordEntries(viewController)
+        XCTAssertNil(viewController.blurView.superview, "precondition")
+        
+        tap(viewController.submitButton)
+        
+        XCTAssertNotNil(viewController.blurView.superview)
+    }
+    
+    func test_tappingSubmit_withValidFields_shouldShowActivityIndicator() {
+        let viewController = setUpViewController()
+        setupValidPasswordEntries(viewController)
+        XCTAssertNil(viewController.activityIndicator.superview, "precondition")
+        
+        tap(viewController.submitButton)
+        
+        XCTAssertNotNil(viewController.activityIndicator.superview)
+    }
+    
+    func test_tappingSubmit_withValidFields_shouldStartActivityAnimation() {
+        let viewController = setUpViewController()
+        setupValidPasswordEntries(viewController)
+        XCTAssertEqual(viewController.activityIndicator.isAnimating, false, "precondition")
+        
+        tap(viewController.submitButton)
+        
+        XCTAssertEqual(viewController.activityIndicator.isAnimating, true)
+    }
+    
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
