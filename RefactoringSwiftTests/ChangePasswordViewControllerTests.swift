@@ -342,6 +342,17 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         executeRunLoop()
     }
     
+    func test_tappingSubmit_withValidFields_shouldDisableCancelBarButton() {
+        let viewController = setUpViewController()
+        setupValidPasswordEntries(viewController)
+        
+        XCTAssertEqual(viewController.cancelBarButton.isEnabled, true, "precondition")
+        
+        tap(viewController.submitButton)
+        
+        XCTAssertEqual(viewController.cancelBarButton.isEnabled, false)
+    }
+    
     private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
         putInViewHeirarchy(viewController)
         textField.becomeFirstResponder()
