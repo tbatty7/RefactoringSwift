@@ -395,9 +395,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     
     func test_tappingSubmit_withValidFields_shouldRequestChangePassword() {
         let viewController = setUpViewController()
-        let passwordChanger = MockPasswordChanger()
-        viewController.passwordChanger = passwordChanger
-        viewController.loadViewIfNeeded()
+        let passwordChanger = setupMockPasswordChanger(viewController)
         
         viewController.oldPasswordTextField.text = "Not-Empty"
         viewController.securityToken = "SecurityToken"
@@ -411,9 +409,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     
     func test_changePasswordSuccess_shouldStopActivityIndicatorAnimation() {
         let viewController = setUpViewController()
-        let passwordChanger = MockPasswordChanger()
-        viewController.passwordChanger = passwordChanger
-        viewController.loadViewIfNeeded()
+        let passwordChanger = setupMockPasswordChanger(viewController)
         
         setupValidPasswordEntries(viewController)
         tap(viewController.submitButton)
@@ -427,9 +423,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     
     func test_changePasswordSuccess_shouldHideActivityIndicator() {
         let viewController = setUpViewController()
-        let passwordChanger = MockPasswordChanger()
-        viewController.passwordChanger = passwordChanger
-        viewController.loadViewIfNeeded()
+        let passwordChanger = setupMockPasswordChanger(viewController)
         
         setupValidPasswordEntries(viewController)
         tap(viewController.submitButton)
@@ -445,9 +439,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     
     func test_changePasswordFailure_shouldStopActivityIndicatorAnimation() {
         let viewController = setUpViewController()
-        let passwordChanger = MockPasswordChanger()
-        viewController.passwordChanger = passwordChanger
-        viewController.loadViewIfNeeded()
+        let passwordChanger = setupMockPasswordChanger(viewController)
         
         setupValidPasswordEntries(viewController)
         tap(viewController.submitButton)
@@ -461,9 +453,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     
     func test_changePasswordFailure_shouldHideActivityIndicator() {
         let viewController = setUpViewController()
-        let passwordChanger = MockPasswordChanger()
-        viewController.passwordChanger = passwordChanger
-        viewController.loadViewIfNeeded()
+        let passwordChanger = setupMockPasswordChanger(viewController)
 
         setupValidPasswordEntries(viewController)
         tap(viewController.submitButton)
@@ -477,10 +467,8 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     
     func test_changePasswordSuccess_shouldShowSuccessAlert() {
         let viewController = setUpViewController()
-        let passwordChanger = MockPasswordChanger()
-        viewController.passwordChanger = passwordChanger
+        let passwordChanger = setupMockPasswordChanger(viewController)
         let alertVerifier = AlertVerifier()
-        viewController.loadViewIfNeeded()
         
         setupValidPasswordEntries(viewController)
         tap(viewController.submitButton)
@@ -492,10 +480,8 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     
     func test_tappingOkInSuccessModal_shouldDismissModal() throws {
         let viewController = setUpViewController()
-        let passwordChanger = MockPasswordChanger()
-        viewController.passwordChanger = passwordChanger
+        let passwordChanger = setupMockPasswordChanger(viewController)
         let alertVerifier = AlertVerifier()
-        viewController.loadViewIfNeeded()
         
         setupValidPasswordEntries(viewController)
         tap(viewController.submitButton)
@@ -549,5 +535,12 @@ final class ChangePasswordViewControllerTests: XCTestCase {
                              presentingViewController: viewController,
                              file: file, line: line)
         XCTAssertEqual(alertVerifier.preferredAction?.title, "OK", "preferredAction", file: file, line: line)
+    }
+    
+    private func setupMockPasswordChanger(_ viewController: ChangePasswordViewController) -> MockPasswordChanger {
+        let passwordChanger = MockPasswordChanger()
+        viewController.passwordChanger = passwordChanger
+        viewController.loadViewIfNeeded()
+        return passwordChanger
     }
 }
