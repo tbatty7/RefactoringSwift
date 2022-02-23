@@ -122,12 +122,14 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
             oldPasswordTextField.becomeFirstResponder()
             return false
         }
+        let message = "Please enter a new password."
+        let okAction: (UIAlertAction) -> Void = { [weak self] _ in
+            self?.newPasswordTextField.becomeFirstResponder()
+        }
         
         if newPasswordTextField.text?.isEmpty ?? true {
-            let alertController = UIAlertController(title: nil, message: "Please enter a new password.", preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "OK", style: .default) {
-                [weak self] _ in self?.newPasswordTextField.becomeFirstResponder()
-            }
+            let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: okAction)
             alertController.addAction(okButton)
             alertController.preferredAction = okButton
             present(alertController, animated: true)
