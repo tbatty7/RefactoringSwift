@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
+class ChangePasswordViewController: UIViewController {
 
     @IBOutlet private(set) var cancelBarButton: UIBarButtonItem!
     @IBOutlet private(set) var oldPasswordTextField: UITextField!
@@ -52,17 +52,7 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         
         attemptToChangePassword()
     }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField === oldPasswordTextField {
-            newPasswordTextField.becomeFirstResponder()
-        } else if textField === newPasswordTextField {
-            confirmPasswordTextField.becomeFirstResponder()
-        } else if textField === confirmPasswordTextField {
-            changePassword()
-        }
-        return true
-    }
+
     
     private func attemptToChangePassword() {
         passwordChanger.change(securityToken: securityToken,
@@ -158,3 +148,16 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
 
 }
 
+extension ChangePasswordViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === oldPasswordTextField {
+            newPasswordTextField.becomeFirstResponder()
+        } else if textField === newPasswordTextField {
+            confirmPasswordTextField.becomeFirstResponder()
+        } else if textField === confirmPasswordTextField {
+            changePassword()
+        }
+        return true
+    }
+}
