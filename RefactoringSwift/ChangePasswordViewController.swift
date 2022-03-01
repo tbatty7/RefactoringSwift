@@ -30,6 +30,7 @@ class ChangePasswordViewController: UIViewController {
         blurView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.color = .white
+        setLabels()
     }
     
     @IBAction private func cancel() {
@@ -149,6 +150,10 @@ class ChangePasswordViewController: UIViewController {
         showAlert(message: message, okAction: { [weak self] _ in
             self?.startOver()
         })
+    }
+    
+    private func setLabels() {
+        
     }
 }
 
