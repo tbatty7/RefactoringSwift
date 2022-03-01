@@ -18,6 +18,7 @@ class ChangePasswordViewController: UIViewController {
     
     lazy var passwordChanger: PasswordChanging = PasswordChanger()
     var securityToken = ""
+    var viewModel: ChangePasswordViewModel!
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     let activityIndicator = UIActivityIndicatorView(style: .large)
     

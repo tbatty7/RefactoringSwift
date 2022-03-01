@@ -653,6 +653,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     private func setUpViewController() -> ChangePasswordViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
+        viewController.viewModel = ChangePasswordViewModel()
         viewController.loadViewIfNeeded()
         
         return viewController
