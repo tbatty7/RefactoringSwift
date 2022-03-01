@@ -156,6 +156,8 @@ class ChangePasswordViewController: UIViewController {
     private func setLabels() {
         navigationBar.topItem?.title = viewModel.title
         oldPasswordTextField.placeholder = viewModel.oldPasswordPlaceholder
+        newPasswordTextField.placeholder = viewModel.newPasswordPlaceholder
+        confirmPasswordTextField.placeholder = viewModel.confirmPasswordPlaceholder
     }
 }
 
