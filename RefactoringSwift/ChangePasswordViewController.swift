@@ -120,7 +120,7 @@ class ChangePasswordViewController: UIViewController {
     
     private func showAlert(message: String, okAction: @escaping (UIAlertAction) -> Void) {
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "OK", style: .default, handler: okAction)
+        let okButton = UIAlertAction(title: viewModel.okButtonLabel, style: .default, handler: okAction)
         alertController.addAction(okButton)
         alertController.preferredAction = okButton
         present(alertController, animated: true)

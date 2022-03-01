@@ -190,7 +190,6 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         let mockPasswordChanger = MockPasswordChanger()
         viewController.passwordChanger = mockPasswordChanger
         viewController.loadViewIfNeeded()
-        let alertVerifier = AlertVerifier()
         
         setupPasswordEntriesNewPasswordTooShort(viewController)
         tap(viewController.submitButton)
@@ -653,7 +652,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     private func setUpViewController() -> ChangePasswordViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
-        viewController.viewModel = ChangePasswordViewModel()
+        viewController.viewModel = ChangePasswordViewModel(okButtonLabel: "OK")
         viewController.loadViewIfNeeded()
         
         return viewController

@@ -7,5 +7,5 @@
 
 import Foundation
 struct ChangePasswordViewModel {
-    
+    let okButtonLabel: String
 }
