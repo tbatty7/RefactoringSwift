@@ -11,4 +11,5 @@ struct ChangePasswordViewModel {
     let enterNewPasswordMessage: String
     let newPasswordTooShortMessage: String
     let confirmationPasswordDoesNotMatchMessage: String
+    let successMessage: String
 }
