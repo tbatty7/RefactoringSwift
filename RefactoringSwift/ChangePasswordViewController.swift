@@ -95,7 +95,7 @@ class ChangePasswordViewController: UIViewController {
         }
         
         if newPasswordTextField.text?.isEmpty ?? true {
-            showAlert(message: "Please enter a new password.",
+            showAlert(message: viewModel.enterNewPasswordMessage,
                       okAction: { [weak self] _ in
                 self?.newPasswordTextField.becomeFirstResponder()
             })

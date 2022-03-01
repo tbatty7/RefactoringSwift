@@ -8,4 +8,5 @@
 import Foundation
 struct ChangePasswordViewModel {
     let okButtonLabel: String
+    let enterNewPasswordMessage: String
 }
