@@ -18,7 +18,15 @@ class ChangePasswordViewController: UIViewController {
     
     lazy var passwordChanger: PasswordChanging = PasswordChanger()
     var securityToken = ""
-    var viewModel: ChangePasswordViewModel!
+    var viewModel: ChangePasswordViewModel! {
+        didSet {
+            guard isViewLoaded else { return }
+            
+            if oldValue.isCancelButtonEnabled != viewModel.isCancelButtonEnabled {
+                cancelBarButton.isEnabled = viewModel.isCancelButtonEnabled
+            }
+        }
+    }
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     let activityIndicator = UIActivityIndicatorView(style: .large)
     
@@ -65,7 +73,7 @@ class ChangePasswordViewController: UIViewController {
     
     private func setupWaitingAppearance() {
         view.endEditing(true)
-        cancelBarButton.isEnabled = false
+        viewModel.isCancelButtonEnabled = false
         view.backgroundColor = .clear
         view.addSubview(blurView)
         view.addSubview(activityIndicator)
@@ -135,7 +143,7 @@ class ChangePasswordViewController: UIViewController {
         oldPasswordTextField.becomeFirstResponder()
         view.backgroundColor = .white
         blurView.removeFromSuperview()
-        cancelBarButton.isEnabled = true
+        viewModel.isCancelButtonEnabled = true
     }
     
     private func handleSuccess() {
