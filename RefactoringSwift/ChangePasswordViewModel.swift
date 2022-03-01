@@ -12,4 +12,9 @@ struct ChangePasswordViewModel {
     let newPasswordTooShortMessage: String
     let confirmationPasswordDoesNotMatchMessage: String
     let successMessage: String
+    let title: String
+    let oldPasswordPlaceholder: String
+    let newPasswordPlaceholder: String
+    let confirmPasswordPlaceholder: String
+    let submitButtonLabel: String
 }

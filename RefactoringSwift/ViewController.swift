@@ -25,7 +25,12 @@ class ViewController: UIViewController {
                                                                   newPasswordTooShortMessage: "The new password should have at least 6 characters.",
                                                                   confirmationPasswordDoesNotMatchMessage: "The new password and the confirmation password " +
                                                                   "don't match. Please try again",
-                                                                  successMessage: "Your password has been successfully changed")
+                                                                  successMessage: "Your password has been successfully changed",
+                                                                  title: "Change Password",
+                                                                  oldPasswordPlaceholder: "Current Password",
+                                                                  newPasswordPlaceholder: "New Password",
+                                                                  confirmPasswordPlaceholder: "Confirm New Password",
+                                                                  submitButtonLabel: "Submit")
         }
     }
     
