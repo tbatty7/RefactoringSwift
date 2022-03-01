@@ -57,8 +57,7 @@ class ChangePasswordViewController: UIViewController {
                                oldPassword: oldPasswordTextField.text ?? "",
                                newPassword: newPasswordTextField.text ?? "",
                                onSuccess: {[weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.activityIndicator.removeFromSuperview()
+            self?.hideSpinner()
             
             self?.showAlert(message: "Your password has been successfully changed",
                       okAction: { [weak self] _ in
@@ -66,8 +65,7 @@ class ChangePasswordViewController: UIViewController {
             })
         },
                                onFailure: {[weak self] message in
-            self?.activityIndicator.stopAnimating()
-            self?.activityIndicator.removeFromSuperview()
+            self?.hideSpinner()
             
             self?.showAlert(message: message, okAction: { [weak self] _ in
                 self?.oldPasswordTextField.text = ""
@@ -141,6 +139,11 @@ class ChangePasswordViewController: UIViewController {
             self?.confirmPasswordTextField.text = ""
             self?.newPasswordTextField.becomeFirstResponder()
         }
+    }
+    
+    private func hideSpinner() {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
     }
 }
 
