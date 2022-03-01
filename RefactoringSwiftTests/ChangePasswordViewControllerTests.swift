@@ -652,7 +652,9 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     private func setUpViewController() -> ChangePasswordViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
-        viewController.viewModel = ChangePasswordViewModel(okButtonLabel: "OK", enterNewPasswordMessage: "Please enter a new password.")
+        viewController.viewModel = ChangePasswordViewModel(okButtonLabel: "OK",
+                                                           enterNewPasswordMessage: "Please enter a new password.",
+                                                           newPasswordTooShortMessage: "The new password should have at least 6 characters.")
         viewController.loadViewIfNeeded()
         
         return viewController

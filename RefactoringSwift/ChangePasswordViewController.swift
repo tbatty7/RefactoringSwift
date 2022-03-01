@@ -103,7 +103,7 @@ class ChangePasswordViewController: UIViewController {
         }
         
         if newPasswordTextField.text?.count ?? 0 < 6 {
-            showAlert(message: "The new password should have at least 6 characters.",
+            showAlert(message: viewModel.newPasswordTooShortMessage,
                       okAction: resetNewPasswords())
             
             return false
