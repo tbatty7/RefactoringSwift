@@ -57,13 +57,7 @@ class ChangePasswordViewController: UIViewController {
         passwordChanger.change(securityToken: securityToken,
                                oldPassword: oldPasswordTextField.text ?? "",
                                newPassword: newPasswordTextField.text ?? "",
-                               onSuccess: {[weak self] in
-            self?.hideSpinner()
-            self?.showAlert(message: "Your password has been successfully changed",
-                      okAction: { [weak self] _ in
-                self?.dismiss(animated: true)
-            })
-        },
+                               onSuccess: {[weak self] in self?.handleSuccess()},
                                onFailure: {[weak self] message in
             self?.hideSpinner()
             self?.showAlert(message: message, okAction: { [weak self] _ in
