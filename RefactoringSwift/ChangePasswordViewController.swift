@@ -58,12 +58,7 @@ class ChangePasswordViewController: UIViewController {
                                oldPassword: oldPasswordTextField.text ?? "",
                                newPassword: newPasswordTextField.text ?? "",
                                onSuccess: {[weak self] in self?.handleSuccess()},
-                               onFailure: {[weak self] message in
-            self?.hideSpinner()
-            self?.showAlert(message: message, okAction: { [weak self] _ in
-                self?.startOver()
-            })
-        })
+                               onFailure: {[weak self] message in self?.handleFailure(message)})
     }
     
     private func setupWaitingAppearance() {
@@ -146,6 +141,13 @@ class ChangePasswordViewController: UIViewController {
         showAlert(message: viewModel.successMessage,
                   okAction: { [weak self] _ in
             self?.dismiss(animated: true)
+        })
+    }
+    
+    private func handleFailure(_ message: String) {
+        hideSpinner()
+        showAlert(message: message, okAction: { [weak self] _ in
+            self?.startOver()
         })
     }
 }
