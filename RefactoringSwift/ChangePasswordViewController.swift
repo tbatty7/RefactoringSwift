@@ -110,9 +110,8 @@ class ChangePasswordViewController: UIViewController {
         }
         
         if newPasswordTextField.text != confirmPasswordTextField.text {
-            let message = "The new password and the confirmation password " +
-            "don't match. Please try again"
-            showAlert(message: message, okAction: resetNewPasswords())
+            showAlert(message: viewModel.confirmationPasswordDoesNotMatchMessage,
+                      okAction: resetNewPasswords())
             return false
         }
         return true
