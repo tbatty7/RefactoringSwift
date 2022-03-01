@@ -50,7 +50,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     func test_submitButton_hasCorrectTitle() {
         let viewController = setUpViewController()
         
-        let title = viewController.submitButton.titleLabel?.text
+        let title = viewController.submitButton.currentTitle
         XCTAssertEqual(title, "Submit")
     }
     

@@ -158,6 +158,7 @@ class ChangePasswordViewController: UIViewController {
         oldPasswordTextField.placeholder = viewModel.oldPasswordPlaceholder
         newPasswordTextField.placeholder = viewModel.newPasswordPlaceholder
         confirmPasswordTextField.placeholder = viewModel.confirmPasswordPlaceholder
+        submitButton.setTitle(viewModel.submitButtonLabel, for: .normal)
     }
 }
 
