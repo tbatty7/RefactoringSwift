@@ -68,13 +68,7 @@ class ChangePasswordViewController: UIViewController {
             self?.hideSpinner()
             
             self?.showAlert(message: message, okAction: { [weak self] _ in
-                self?.oldPasswordTextField.text = ""
-                self?.newPasswordTextField.text = ""
-                self?.confirmPasswordTextField.text = ""
-                self?.oldPasswordTextField.becomeFirstResponder()
-                self?.view.backgroundColor = .white
-                self?.blurView.removeFromSuperview()
-                self?.cancelBarButton.isEnabled = true
+                self?.startOver()
             })
         })
     }
@@ -144,6 +138,16 @@ class ChangePasswordViewController: UIViewController {
     private func hideSpinner() {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
+    }
+    
+    private func startOver() {
+        self.oldPasswordTextField.text = ""
+        self.newPasswordTextField.text = ""
+        self.confirmPasswordTextField.text = ""
+        self.oldPasswordTextField.becomeFirstResponder()
+        self.view.backgroundColor = .white
+        self.blurView.removeFromSuperview()
+        self.cancelBarButton.isEnabled = true
     }
 }
 
