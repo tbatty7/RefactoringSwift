@@ -32,6 +32,7 @@ class ChangePasswordViewController: UIViewController {
         activityIndicator.color = .white
         setLabels()
     }
+
     
     @IBAction private func cancel() {
         view.endEditing(true)
@@ -153,7 +154,8 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func setLabels() {
-        
+        navigationBar.topItem?.title = viewModel.title
+        oldPasswordTextField.placeholder = viewModel.oldPasswordPlaceholder
     }
 }
 
