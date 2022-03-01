@@ -96,6 +96,7 @@ class ChangePasswordViewController: UIViewController {
         activityIndicator.startAnimating()
     }
     
+    
     private func validateInputs() -> Bool {
         if oldPasswordTextField.text?.isEmpty ?? true {
             oldPasswordTextField.becomeFirstResponder()
@@ -112,11 +113,7 @@ class ChangePasswordViewController: UIViewController {
         
         if newPasswordTextField.text?.count ?? 0 < 6 {
             showAlert(message: "The new password should have at least 6 characters.",
-                      okAction: { [weak self] _ in
-                self?.newPasswordTextField.text = ""
-                self?.confirmPasswordTextField.text = ""
-                self?.newPasswordTextField.becomeFirstResponder()
-            })
+                      okAction: resetNewPasswords())
             
             return false
         }
@@ -124,11 +121,7 @@ class ChangePasswordViewController: UIViewController {
         if newPasswordTextField.text != confirmPasswordTextField.text {
             let message = "The new password and the confirmation password " +
             "don't match. Please try again"
-            showAlert(message: message, okAction: { [weak self] _ in
-                self?.newPasswordTextField.text = ""
-                self?.confirmPasswordTextField.text = ""
-                self?.newPasswordTextField.becomeFirstResponder()
-            })
+            showAlert(message: message, okAction: resetNewPasswords())
             return false
         }
         return true
@@ -142,6 +135,13 @@ class ChangePasswordViewController: UIViewController {
         present(alertController, animated: true)
     }
 
+    private func resetNewPasswords() -> (UIAlertAction) -> Void {
+        return { [weak self] _ in
+            self?.newPasswordTextField.text = ""
+            self?.confirmPasswordTextField.text = ""
+            self?.newPasswordTextField.becomeFirstResponder()
+        }
+    }
 }
 
 extension ChangePasswordViewController: UITextFieldDelegate {
