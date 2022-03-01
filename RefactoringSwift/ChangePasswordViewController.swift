@@ -58,7 +58,6 @@ class ChangePasswordViewController: UIViewController {
                                newPassword: newPasswordTextField.text ?? "",
                                onSuccess: {[weak self] in
             self?.hideSpinner()
-            
             self?.showAlert(message: "Your password has been successfully changed",
                       okAction: { [weak self] _ in
                 self?.dismiss(animated: true)
@@ -66,7 +65,6 @@ class ChangePasswordViewController: UIViewController {
         },
                                onFailure: {[weak self] message in
             self?.hideSpinner()
-            
             self?.showAlert(message: message, okAction: { [weak self] _ in
                 self?.startOver()
             })
