@@ -51,7 +51,7 @@ class ChangePasswordViewController: UIViewController {
     
     @IBAction private func cancel() {
         viewModel.inputFocus = .noKeyboard
-        dismiss(animated: true)
+        dismissModal()
     }
     
     deinit {
@@ -139,7 +139,7 @@ class ChangePasswordViewController: UIViewController {
         hideActivityIndicator()
         showAlert(message: viewModel.successMessage,
                   okAction: { [weak self] _ in
-            self?.dismiss(animated: true)
+            self?.dismissModal()
         })
     }
     
@@ -221,5 +221,9 @@ extension ChangePasswordViewController : ChangePasswordViewCommands {
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         activityIndicator.startAnimating()
+    }
+    
+    func dismissModal() {
+        self.dismiss(animated: true)
     }
 }

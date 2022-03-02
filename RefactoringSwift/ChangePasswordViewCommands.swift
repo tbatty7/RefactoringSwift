@@ -10,4 +10,5 @@ import Foundation
 protocol ChangePasswordViewCommands: AnyObject {
     func hideActivityIndicator()
     func showActivityIndicator()
+    func dismissModal()
 }
