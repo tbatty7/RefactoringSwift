@@ -22,6 +22,9 @@ struct ChangePasswordViewModel {
     var inputFocus: InputFocus = .noKeyboard
     var isBlurViewShowing = false
     var isActivityIndicatorShowing = false
+    var oldPassword = ""
+    var newPassword = ""
+    var confirmPassword = ""
     
     enum InputFocus {
         case noKeyboard

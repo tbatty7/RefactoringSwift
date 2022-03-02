@@ -204,6 +204,13 @@ class ChangePasswordViewController: UIViewController {
             activityIndicator.removeFromSuperview()
         }
     }
+    
+    private func updateViewModelToTextFields() {
+        viewModel.oldPassword = oldPasswordTextField.text ?? ""
+        viewModel.newPassword = newPasswordTextField.text ?? ""
+        viewModel.confirmPassword = confirmPasswordTextField.text ?? ""
+    }
+        
 }
 
 extension ChangePasswordViewController: UITextFieldDelegate {
