@@ -106,9 +106,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func startOver() {
-        oldPasswordTextField.text = ""
-        newPasswordTextField.text = ""
-        confirmPasswordTextField.text = ""
+        clearAllPasswordFields()
         updateInputFocus(.oldPassword)
         hideBlurView()
         setCancelButtonEnabled(true)
@@ -212,5 +210,11 @@ extension ChangePasswordViewController : ChangePasswordViewCommands {
         case .confirmPassword:
             confirmPasswordTextField.becomeFirstResponder()
         }
+    }
+    
+    func clearAllPasswordFields() {
+        oldPasswordTextField.text = ""
+        newPasswordTextField.text = ""
+        confirmPasswordTextField.text = ""
     }
 }
