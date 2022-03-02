@@ -25,11 +25,11 @@ struct ChangePasswordViewModel {
     var isNewPasswordEmpty: Bool { newPassword.isEmpty }
     var isNewPasswordTooShort: Bool { newPassword.count < 6 }
     var isConfirmPasswordMismatched: Bool { newPassword != confirmPassword }
-    
-    enum InputFocus {
-        case noKeyboard
-        case oldPassword
-        case newPassword
-        case confirmPassword
-    }
+    typealias InputFocus = RefactoringSwift.InputFocus
+//    enum InputFocus {
+//        case noKeyboard
+//        case oldPassword
+//        case newPassword
+//        case confirmPassword
+//    }
 }
