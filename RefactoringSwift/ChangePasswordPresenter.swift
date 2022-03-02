@@ -15,4 +15,12 @@ class ChangePasswordPresenter {
         self.view = view
         self.viewModel = viewModel
     }
+    
+    func handleSuccess() {
+        view.hideActivityIndicator()
+        view.showAlert(message: viewModel.successMessage,
+                  okAction: { [weak self] in
+            self?.view.dismissModal()
+        })
+    }
 }

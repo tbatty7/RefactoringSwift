@@ -70,7 +70,7 @@ class ChangePasswordViewController: UIViewController {
         passwordChanger.change(securityToken: securityToken,
                                oldPassword: viewModel.oldPassword,
                                newPassword: viewModel.newPassword,
-                               onSuccess: {[weak self] in self?.handleSuccess()},
+                               onSuccess: {[weak self] in self?.presenter.handleSuccess()},
                                onFailure: {[weak self] message in self?.handleFailure(message)})
     }
     
@@ -126,14 +126,6 @@ class ChangePasswordViewController: UIViewController {
         viewModel.inputFocus = .oldPassword
         viewModel.isBlurViewShowing = false
         viewModel.isCancelButtonEnabled = true
-    }
-    
-    private func handleSuccess() {
-        hideActivityIndicator()
-        showAlert(message: viewModel.successMessage,
-                  okAction: { [weak self] in
-            self?.dismissModal()
-        })
     }
     
     private func handleFailure(_ message: String) {
