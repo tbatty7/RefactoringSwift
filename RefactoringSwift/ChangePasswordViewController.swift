@@ -34,9 +34,6 @@ class ChangePasswordViewController: UIViewController {
             if oldValue.isBlurViewShowing != viewModel.isBlurViewShowing {
                 updateBlurView()
             }
-            if oldValue.isActivityIndicatorShowing != viewModel.isActivityIndicatorShowing {
-                updateActivityIndicator()
-            }
         }
     }
     
@@ -185,14 +182,6 @@ class ChangePasswordViewController: UIViewController {
         } else {
             view.backgroundColor = .white
             blurView.removeFromSuperview()
-        }
-    }
-    
-    private func updateActivityIndicator() {
-        if viewModel.isActivityIndicatorShowing {
-//            showActivityIndicator()
-        } else {
-//            hideActivityIndicator()
         }
     }
     

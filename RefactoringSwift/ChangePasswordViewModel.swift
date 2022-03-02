@@ -21,7 +21,6 @@ struct ChangePasswordViewModel {
     var isCancelButtonEnabled = true
     var inputFocus: InputFocus = .noKeyboard
     var isBlurViewShowing = false
-    var isActivityIndicatorShowing = false
     var oldPassword = ""
     var newPassword = ""
     var confirmPassword = ""
