@@ -23,6 +23,7 @@
 		225C7A1927C422CE00CB031F /* ViewControllerPresentationSpy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225C7A1827C422CE00CB031F /* ViewControllerPresentationSpy.xcframework */; };
 		225C7A1B27C422E300CB031F /* ViewControllerPresentationSpy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 225C7A1827C422CE00CB031F /* ViewControllerPresentationSpy.xcframework */; };
 		226D9F9427CFD07200745D1A /* ChangePasswordViewCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9F9327CFD07200745D1A /* ChangePasswordViewCommands.swift */; };
+		226D9F9627CFD16800745D1A /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9F9527CFD16800745D1A /* ChangePasswordPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		2257F1F727CE75670082415E /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		225C7A1827C422CE00CB031F /* ViewControllerPresentationSpy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ViewControllerPresentationSpy.xcframework; sourceTree = "<group>"; };
 		226D9F9327CFD07200745D1A /* ChangePasswordViewCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewCommands.swift; sourceTree = "<group>"; };
+		226D9F9527CFD16800745D1A /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				2234307427C0259000A485F9 /* ChangePasswordViewController.swift */,
 				2257F1F727CE75670082415E /* ChangePasswordViewModel.swift */,
 				226D9F9327CFD07200745D1A /* ChangePasswordViewCommands.swift */,
+				226D9F9527CFD16800745D1A /* ChangePasswordPresenter.swift */,
 			);
 			path = RefactoringSwift;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2234304527C008F500A485F9 /* ViewController.swift in Sources */,
+				226D9F9627CFD16800745D1A /* ChangePasswordPresenter.swift in Sources */,
 				2257F1F827CE75670082415E /* ChangePasswordViewModel.swift in Sources */,
 				2234304127C008F500A485F9 /* AppDelegate.swift in Sources */,
 				226D9F9427CFD07200745D1A /* ChangePasswordViewCommands.swift in Sources */,
