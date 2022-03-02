@@ -13,4 +13,5 @@ protocol ChangePasswordViewCommands: AnyObject {
     func dismissModal()
     func showAlert(message: String, okAction: @escaping () -> Void)
     func hideBlurView()
+    func showBlurView()
 }

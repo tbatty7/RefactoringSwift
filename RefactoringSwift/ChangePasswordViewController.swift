@@ -77,7 +77,7 @@ class ChangePasswordViewController: UIViewController {
     private func setupWaitingAppearance() {
         viewModel.inputFocus = .noKeyboard
         viewModel.isCancelButtonEnabled = false
-        viewModel.isBlurViewShowing = true
+        showBlurView()
         showActivityIndicator()
     }
     
@@ -158,12 +158,7 @@ class ChangePasswordViewController: UIViewController {
     
     private func updateBlurView() {
         if viewModel.isBlurViewShowing {
-            view.backgroundColor = .clear
-            view.addSubview(blurView)
-            NSLayoutConstraint.activate([
-                blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
-                blurView.widthAnchor.constraint(equalTo: view.widthAnchor)
-            ])
+//            showBlurView()
         } else {
 //            hideBlurView()
         }
@@ -226,5 +221,14 @@ extension ChangePasswordViewController : ChangePasswordViewCommands {
     func hideBlurView() {
         view.backgroundColor = .white
         blurView.removeFromSuperview()
+    }
+    
+    func showBlurView() {
+        view.backgroundColor = .clear
+        view.addSubview(blurView)
+        NSLayoutConstraint.activate([
+            blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            blurView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
     }
 }
