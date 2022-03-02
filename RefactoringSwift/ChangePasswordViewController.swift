@@ -81,7 +81,7 @@ class ChangePasswordViewController: UIViewController {
         viewModel.inputFocus = .noKeyboard
         viewModel.isCancelButtonEnabled = false
         viewModel.isBlurViewShowing = true
-        viewModel.isActivityIndicatorShowing = true
+        showActivityIndicator()
     }
     
     
@@ -139,7 +139,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func handleSuccess() {
-        viewModel.isActivityIndicatorShowing = false
+        hideActivityIndicator()
         showAlert(message: viewModel.successMessage,
                   okAction: { [weak self] _ in
             self?.dismiss(animated: true)
@@ -147,7 +147,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func handleFailure(_ message: String) {
-        viewModel.isActivityIndicatorShowing = false
+        hideActivityIndicator()
         showAlert(message: message, okAction: { [weak self] _ in
             self?.startOver()
         })
@@ -190,9 +190,9 @@ class ChangePasswordViewController: UIViewController {
     
     private func updateActivityIndicator() {
         if viewModel.isActivityIndicatorShowing {
-            showActivityIndicator()
+//            showActivityIndicator()
         } else {
-            hideActivityIndicator()
+//            hideActivityIndicator()
         }
     }
     
