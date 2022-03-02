@@ -8,7 +8,7 @@
 import Foundation
 
 class ChangePasswordPresenter {
-    private unowned var view: ChangePasswordViewCommands
+    private unowned var view: ChangePasswordViewCommands!
     
     init(view: ChangePasswordViewCommands) {
         self.view = view
