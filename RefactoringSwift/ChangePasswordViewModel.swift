@@ -20,7 +20,6 @@ struct ChangePasswordViewModel {
     let submitButtonLabel: String
     var isCancelButtonEnabled = true
     var inputFocus: InputFocus = .noKeyboard
-    var isBlurViewShowing = false
     var oldPassword = ""
     var newPassword = ""
     var confirmPassword = ""

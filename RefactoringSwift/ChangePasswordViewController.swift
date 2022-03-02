@@ -31,9 +31,6 @@ class ChangePasswordViewController: UIViewController {
             if oldValue.inputFocus != viewModel.inputFocus {
                 updateInputFocus()
             }
-            if oldValue.isBlurViewShowing != viewModel.isBlurViewShowing {
-                updateBlurView()
-            }
         }
     }
     
@@ -153,14 +150,6 @@ class ChangePasswordViewController: UIViewController {
             newPasswordTextField.becomeFirstResponder()
         case .confirmPassword:
             confirmPasswordTextField.becomeFirstResponder()
-        }
-    }
-    
-    private func updateBlurView() {
-        if viewModel.isBlurViewShowing {
-//            showBlurView()
-        } else {
-//            hideBlurView()
         }
     }
     
