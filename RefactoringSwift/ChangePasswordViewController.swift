@@ -46,7 +46,7 @@ class ChangePasswordViewController: UIViewController {
 
     
     @IBAction private func cancel() {
-        view.endEditing(true)
+        viewModel.inputFocus = .noKeyboard
         dismiss(animated: true)
     }
     
@@ -75,7 +75,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func setupWaitingAppearance() {
-        view.endEditing(true)
+        viewModel.inputFocus = .noKeyboard
         viewModel.isCancelButtonEnabled = false
         view.backgroundColor = .clear
         view.addSubview(blurView)
@@ -92,14 +92,14 @@ class ChangePasswordViewController: UIViewController {
     
     private func validateInputs() -> Bool {
         if oldPasswordTextField.text?.isEmpty ?? true {
-            oldPasswordTextField.becomeFirstResponder()
+            viewModel.inputFocus = .oldPassword
             return false
         }
         
         if newPasswordTextField.text?.isEmpty ?? true {
             showAlert(message: viewModel.enterNewPasswordMessage,
                       okAction: { [weak self] _ in
-                self?.newPasswordTextField.becomeFirstResponder()
+                self?.viewModel.inputFocus = .newPassword
             })
             return false
         }
@@ -130,7 +130,7 @@ class ChangePasswordViewController: UIViewController {
         return { [weak self] _ in
             self?.newPasswordTextField.text = ""
             self?.confirmPasswordTextField.text = ""
-            self?.newPasswordTextField.becomeFirstResponder()
+            self?.viewModel.inputFocus = .newPassword
         }
     }
     
@@ -143,7 +143,7 @@ class ChangePasswordViewController: UIViewController {
         oldPasswordTextField.text = ""
         newPasswordTextField.text = ""
         confirmPasswordTextField.text = ""
-        oldPasswordTextField.becomeFirstResponder()
+        viewModel.inputFocus = .oldPassword
         view.backgroundColor = .white
         blurView.removeFromSuperview()
         viewModel.isCancelButtonEnabled = true
@@ -190,9 +190,9 @@ extension ChangePasswordViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField === oldPasswordTextField {
-            newPasswordTextField.becomeFirstResponder()
+            viewModel.inputFocus = .newPassword
         } else if textField === newPasswordTextField {
-            confirmPasswordTextField.becomeFirstResponder()
+            viewModel.inputFocus = .confirmPassword
         } else if textField === confirmPasswordTextField {
             changePassword()
         }
