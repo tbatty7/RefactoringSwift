@@ -700,7 +700,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         return passwordChanger
     }
     
-    private func putFocusOn(_ inputFocus: ChangePasswordViewModel.InputFocus,
+    private func putFocusOn(_ inputFocus: InputFocus,
                             _ viewController: ChangePasswordViewController) {
         putInViewHeirarchy(viewController)
         viewController.updateInputFocus(inputFocus)

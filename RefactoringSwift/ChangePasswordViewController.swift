@@ -201,7 +201,7 @@ extension ChangePasswordViewController : ChangePasswordViewCommands {
         cancelBarButton.isEnabled = isEnabled
     }
     
-    func updateInputFocus(_ inputFocus: ChangePasswordViewModel.InputFocus) {
+    func updateInputFocus(_ inputFocus: InputFocus) {
         switch inputFocus {
         case .noKeyboard:
             view.endEditing(true)

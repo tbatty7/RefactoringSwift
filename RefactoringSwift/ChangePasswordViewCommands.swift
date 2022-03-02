@@ -15,7 +15,7 @@ protocol ChangePasswordViewCommands: AnyObject {
     func hideBlurView()
     func showBlurView()
     func setCancelButtonEnabled(_ isEnabled: Bool)
-    func updateInputFocus(_ inputFocus: ChangePasswordViewModel.InputFocus)
+    func updateInputFocus(_ inputFocus: InputFocus)
     
 }
 
