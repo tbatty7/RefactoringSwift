@@ -190,15 +190,9 @@ class ChangePasswordViewController: UIViewController {
     
     private func updateActivityIndicator() {
         if viewModel.isActivityIndicatorShowing {
-            view.addSubview(activityIndicator)
-            NSLayoutConstraint.activate([
-                activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-            ])
-            activityIndicator.startAnimating()
+            showActivityIndicator()
         } else {
-            activityIndicator.stopAnimating()
-            activityIndicator.removeFromSuperview()
+            hideActivityIndicator()
         }
     }
     
@@ -224,4 +218,19 @@ extension ChangePasswordViewController: UITextFieldDelegate {
     }
 }
 
-extension ChangePasswordViewController : ChangePasswordViewCommands {}
+extension ChangePasswordViewController : ChangePasswordViewCommands {
+    
+    func hideActivityIndicator() {
+        activityIndicator.stopAnimating()
+        activityIndicator.removeFromSuperview()
+    }
+    
+    func showActivityIndicator() {
+        view.addSubview(activityIndicator)
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        activityIndicator.startAnimating()
+    }
+}
