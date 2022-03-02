@@ -90,7 +90,7 @@ class ChangePasswordViewController: UIViewController {
 
         if viewModel.isNewPasswordEmpty {
             showAlert(message: viewModel.enterNewPasswordMessage,
-                      okAction: { [weak self] _ in
+                      okAction: { [weak self] in
                 self?.viewModel.inputFocus = .newPassword
             })
             return false
@@ -110,16 +110,9 @@ class ChangePasswordViewController: UIViewController {
         return true
     }
     
-    private func showAlert(message: String, okAction: @escaping (UIAlertAction) -> Void) {
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: viewModel.okButtonLabel, style: .default, handler: okAction)
-        alertController.addAction(okButton)
-        alertController.preferredAction = okButton
-        present(alertController, animated: true)
-    }
 
-    private func resetNewPasswords() -> (UIAlertAction) -> Void {
-        return { [weak self] _ in
+    private func resetNewPasswords() -> () -> Void {
+        return { [weak self] in
             self?.newPasswordTextField.text = ""
             self?.confirmPasswordTextField.text = ""
             self?.viewModel.inputFocus = .newPassword
@@ -138,14 +131,14 @@ class ChangePasswordViewController: UIViewController {
     private func handleSuccess() {
         hideActivityIndicator()
         showAlert(message: viewModel.successMessage,
-                  okAction: { [weak self] _ in
+                  okAction: { [weak self] in
             self?.dismissModal()
         })
     }
     
     private func handleFailure(_ message: String) {
         hideActivityIndicator()
-        showAlert(message: message, okAction: { [weak self] _ in
+        showAlert(message: message, okAction: { [weak self] in
             self?.startOver()
         })
     }
@@ -190,7 +183,6 @@ class ChangePasswordViewController: UIViewController {
         viewModel.newPassword = newPasswordTextField.text ?? ""
         viewModel.confirmPassword = confirmPasswordTextField.text ?? ""
     }
-        
 }
 
 extension ChangePasswordViewController: UITextFieldDelegate {
@@ -225,5 +217,18 @@ extension ChangePasswordViewController : ChangePasswordViewCommands {
     
     func dismissModal() {
         self.dismiss(animated: true)
+    }
+    
+    private func showAlert(message: String, okAction: @escaping (UIAlertAction) -> Void) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: viewModel.okButtonLabel, style: .default, handler: okAction)
+        alertController.addAction(okButton)
+        alertController.preferredAction = okButton
+        present(alertController, animated: true)
+    }
+    
+    func showAlert(message: String, okAction: @escaping () -> Void) {
+        let wrappedAction: (UIAlertAction) -> Void = { _ in okAction() }
+        showAlert(message: message, okAction: { wrappedAction($0) })
     }
 }
