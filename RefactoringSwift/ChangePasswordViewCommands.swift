@@ -11,4 +11,5 @@ protocol ChangePasswordViewCommands: AnyObject {
     func hideActivityIndicator()
     func showActivityIndicator()
     func dismissModal()
+    func showAlert(message: String, okAction: @escaping () -> Void)
 }
