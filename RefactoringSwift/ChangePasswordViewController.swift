@@ -28,6 +28,9 @@ class ChangePasswordViewController: UIViewController {
             if oldValue.inputFocus != viewModel.inputFocus {
                 updateInputFocus()
             }
+            if oldValue.isBlurViewShowing != viewModel.isBlurViewShowing {
+                updateBlurView()
+            }
         }
     }
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -182,6 +185,14 @@ class ChangePasswordViewController: UIViewController {
             newPasswordTextField.becomeFirstResponder()
         case .confirmPassword:
             confirmPasswordTextField.becomeFirstResponder()
+        }
+    }
+    
+    private func updateBlurView() {
+        if viewModel.isBlurViewShowing {
+            
+        } else {
+            
         }
     }
 }
