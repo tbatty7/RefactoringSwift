@@ -124,7 +124,7 @@ class ChangePasswordViewController: UIViewController {
         newPasswordTextField.text = ""
         confirmPasswordTextField.text = ""
         viewModel.inputFocus = .oldPassword
-        viewModel.isBlurViewShowing = false
+        hideBlurView()
         viewModel.isCancelButtonEnabled = true
     }
     
@@ -165,8 +165,7 @@ class ChangePasswordViewController: UIViewController {
                 blurView.widthAnchor.constraint(equalTo: view.widthAnchor)
             ])
         } else {
-            view.backgroundColor = .white
-            blurView.removeFromSuperview()
+//            hideBlurView()
         }
     }
     
@@ -222,5 +221,10 @@ extension ChangePasswordViewController : ChangePasswordViewCommands {
     func showAlert(message: String, okAction: @escaping () -> Void) {
         let wrappedAction: (UIAlertAction) -> Void = { _ in okAction() }
         showAlert(message: message, okAction: { wrappedAction($0) })
+    }
+    
+    func hideBlurView() {
+        view.backgroundColor = .white
+        blurView.removeFromSuperview()
     }
 }
