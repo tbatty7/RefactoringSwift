@@ -9,8 +9,10 @@ import Foundation
 
 class ChangePasswordPresenter {
     private unowned var view: ChangePasswordViewCommands!
+    private var viewModel: ChangePasswordViewModel
     
-    init(view: ChangePasswordViewCommands) {
+    init(view: ChangePasswordViewCommands, viewModel: ChangePasswordViewModel) {
         self.view = view
+        self.viewModel = viewModel
     }
 }
