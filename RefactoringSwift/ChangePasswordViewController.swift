@@ -16,6 +16,8 @@ class ChangePasswordViewController: UIViewController {
     @IBOutlet private(set) var submitButton: UIButton!
     @IBOutlet private(set) var navigationBar: UINavigationBar!
     
+    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    let activityIndicator = UIActivityIndicatorView(style: .large)
     lazy var passwordChanger: PasswordChanging = PasswordChanger()
     var securityToken = ""
     var viewModel: ChangePasswordViewModel! {
@@ -36,8 +38,6 @@ class ChangePasswordViewController: UIViewController {
             }
         }
     }
-    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    let activityIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +89,7 @@ class ChangePasswordViewController: UIViewController {
             viewModel.inputFocus = .oldPassword
             return false
         }
-        
+
         if viewModel.isNewPasswordEmpty {
             showAlert(message: viewModel.enterNewPasswordMessage,
                       okAction: { [weak self] _ in
