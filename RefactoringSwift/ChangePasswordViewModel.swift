@@ -25,6 +25,10 @@ struct ChangePasswordViewModel {
     var oldPassword = ""
     var newPassword = ""
     var confirmPassword = ""
+    var isOldPasswordEmpty: Bool { oldPassword.isEmpty }
+    var isNewPasswordEmpty: Bool { newPassword.isEmpty }
+    var isNewPasswordTooShort: Bool { newPassword.count < 6 }
+    var isConfirmPasswordMismatched: Bool { newPassword != confirmPassword }
     
     enum InputFocus {
         case noKeyboard
