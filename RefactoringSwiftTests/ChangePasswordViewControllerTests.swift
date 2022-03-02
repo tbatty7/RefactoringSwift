@@ -83,7 +83,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     
     func test_cancelButton_removesFocusFromOldPasswordField() {
             let viewController = setUpViewController()
-            putFocusOn(textField: viewController.oldPasswordTextField, viewController)
+        putFocusOn(.oldPassword, viewController)
             XCTAssertTrue(viewController.oldPasswordTextField.isFirstResponder, "precondition")
 
             tap(viewController.cancelBarButton)
@@ -94,7 +94,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
 
     func test_cancelButton_removesFocusFromNewPasswordField() {
         let viewController = setUpViewController()
-        putFocusOn(textField: viewController.newPasswordTextField, viewController)
+        putFocusOn(.newPassword, viewController)
         XCTAssertTrue(viewController.newPasswordTextField.isFirstResponder, "precondition")
         
         tap(viewController.cancelBarButton)
@@ -105,7 +105,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     
     func test_cancelButton_removesFocusFromConfirmPasswordField() {
         let viewController = setUpViewController()
-        putFocusOn(textField: viewController.confirmPasswordTextField, viewController)
+        putFocusOn(.confirmPassword, viewController)
         XCTAssertTrue(viewController.confirmPasswordTextField.isFirstResponder, "precondition")
         
         tap(viewController.cancelBarButton)
@@ -308,7 +308,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     func test_tappingSubmit_withValidFieldsFocusedOnOldPassword_resignsFocus() {
         let viewController = setUpViewController()
         setupValidPasswordEntries(viewController)
-        putFocusOn(textField: viewController.oldPasswordTextField, viewController)
+        putFocusOn(.oldPassword, viewController)
         XCTAssertEqual(viewController.oldPasswordTextField.isFirstResponder, true, "precondition")
         
         tap(viewController.submitButton)
@@ -320,7 +320,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     func test_tappingSubmit_withValidFieldsFocusedOnNewPassword_resignsFocus() {
         let viewController = setUpViewController()
         setupValidPasswordEntries(viewController)
-        putFocusOn(textField: viewController.newPasswordTextField, viewController)
+        putFocusOn(.newPassword, viewController)
         XCTAssertEqual(viewController.newPasswordTextField.isFirstResponder, true, "precondition")
         
         tap(viewController.submitButton)
@@ -332,7 +332,7 @@ final class ChangePasswordViewControllerTests: XCTestCase {
     func test_tappingSubmit_withValidFieldsFocusedOnConfirmPassword_resignsFocus() {
         let viewController = setUpViewController()
         setupValidPasswordEntries(viewController)
-        putFocusOn(textField: viewController.confirmPasswordTextField, viewController)
+        putFocusOn(.confirmPassword, viewController)
         XCTAssertEqual(viewController.confirmPasswordTextField.isFirstResponder, true, "precondition")
         
         tap(viewController.submitButton)
@@ -644,11 +644,6 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         passwordChanger.changeCallFailure(message: "Useful Message")
     }
     
-    private func putFocusOn(textField: UITextField, _ viewController: UIViewController) {
-        putInViewHeirarchy(viewController)
-        textField.becomeFirstResponder()
-    }
-    
     private func setUpViewController() -> ChangePasswordViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController: ChangePasswordViewController = storyboard.instantiateViewController(identifier: String(describing: ChangePasswordViewController.self))
@@ -703,5 +698,11 @@ final class ChangePasswordViewControllerTests: XCTestCase {
         viewController.passwordChanger = passwordChanger
         viewController.loadViewIfNeeded()
         return passwordChanger
+    }
+    
+    private func putFocusOn(_ inputFocus: ChangePasswordViewModel.InputFocus,
+                            _ viewController: ChangePasswordViewController) {
+        putInViewHeirarchy(viewController)
+        viewController.viewModel.inputFocus = inputFocus
     }
 }
