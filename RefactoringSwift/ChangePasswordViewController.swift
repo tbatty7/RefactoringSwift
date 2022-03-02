@@ -24,10 +24,10 @@ class ChangePasswordViewController: UIViewController {
     var viewModel: ChangePasswordViewModel! {
         didSet {
             guard isViewLoaded else { return }
-
-            if oldValue.inputFocus != viewModel.inputFocus {
-                updateInputFocus()
-            }
+//
+//            if oldValue.inputFocus != viewModel.inputFocus {
+//                updateInputFocus(viewModel.inputFocus)
+//            }
         }
     }
     
@@ -44,7 +44,7 @@ class ChangePasswordViewController: UIViewController {
 
     
     @IBAction private func cancel() {
-        viewModel.inputFocus = .noKeyboard
+        updateInputFocus(.noKeyboard)
         dismissModal()
     }
     
@@ -69,7 +69,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func setupWaitingAppearance() {
-        viewModel.inputFocus = .noKeyboard
+        updateInputFocus(.noKeyboard)
         setCancelButtonEnabled(false)
         showBlurView()
         showActivityIndicator()
@@ -78,14 +78,14 @@ class ChangePasswordViewController: UIViewController {
     
     private func validateInputs() -> Bool {
         if viewModel.isOldPasswordEmpty {
-            viewModel.inputFocus = .oldPassword
+            updateInputFocus(.oldPassword)
             return false
         }
 
         if viewModel.isNewPasswordEmpty {
             showAlert(message: viewModel.enterNewPasswordMessage,
                       okAction: { [weak self] in
-                self?.viewModel.inputFocus = .newPassword
+                self?.updateInputFocus(.newPassword)
             })
             return false
         }
@@ -109,7 +109,7 @@ class ChangePasswordViewController: UIViewController {
         return { [weak self] in
             self?.newPasswordTextField.text = ""
             self?.confirmPasswordTextField.text = ""
-            self?.viewModel.inputFocus = .newPassword
+            self?.updateInputFocus(.newPassword)
         }
     }
     
@@ -117,7 +117,7 @@ class ChangePasswordViewController: UIViewController {
         oldPasswordTextField.text = ""
         newPasswordTextField.text = ""
         confirmPasswordTextField.text = ""
-        viewModel.inputFocus = .oldPassword
+        updateInputFocus(.oldPassword)
         hideBlurView()
         setCancelButtonEnabled(true)
     }
@@ -137,19 +137,6 @@ class ChangePasswordViewController: UIViewController {
         submitButton.setTitle(viewModel.submitButtonLabel, for: .normal)
     }
     
-    private func updateInputFocus() {
-        switch viewModel.inputFocus {
-        case .noKeyboard:
-            view.endEditing(true)
-        case .oldPassword:
-            oldPasswordTextField.becomeFirstResponder()
-        case .newPassword:
-            newPasswordTextField.becomeFirstResponder()
-        case .confirmPassword:
-            confirmPasswordTextField.becomeFirstResponder()
-        }
-    }
-    
     private func updateViewModelToTextFields() {
         viewModel.oldPassword = oldPasswordTextField.text ?? ""
         viewModel.newPassword = newPasswordTextField.text ?? ""
@@ -161,9 +148,9 @@ extension ChangePasswordViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField === oldPasswordTextField {
-            viewModel.inputFocus = .newPassword
+            updateInputFocus(.newPassword)
         } else if textField === newPasswordTextField {
-            viewModel.inputFocus = .confirmPassword
+            updateInputFocus(.confirmPassword)
         } else if textField === confirmPasswordTextField {
             changePassword()
         }
@@ -220,5 +207,18 @@ extension ChangePasswordViewController : ChangePasswordViewCommands {
     
     func setCancelButtonEnabled(_ isEnabled: Bool) {
         cancelBarButton.isEnabled = isEnabled
+    }
+    
+    func updateInputFocus(_ inputFocus: ChangePasswordViewModel.InputFocus) {
+        switch inputFocus {
+        case .noKeyboard:
+            view.endEditing(true)
+        case .oldPassword:
+            oldPasswordTextField.becomeFirstResponder()
+        case .newPassword:
+            newPasswordTextField.becomeFirstResponder()
+        case .confirmPassword:
+            confirmPasswordTextField.becomeFirstResponder()
+        }
     }
 }
