@@ -105,17 +105,10 @@ class ChangePasswordViewController: UIViewController {
         }
     }
     
-    private func startOver() {
-        clearAllPasswordFields()
-        updateInputFocus(.oldPassword)
-        hideBlurView()
-        setCancelButtonEnabled(true)
-    }
-    
     private func handleFailure(_ message: String) {
         hideActivityIndicator()
         showAlert(message: message, okAction: { [weak self] in
-            self?.startOver()
+            self?.presenter.startOver()
         })
     }
     

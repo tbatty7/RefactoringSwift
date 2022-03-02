@@ -23,4 +23,11 @@ class ChangePasswordPresenter {
             self?.view.dismissModal()
         })
     }
+    
+    func startOver() {
+        view.clearAllPasswordFields()
+        view.updateInputFocus(.oldPassword)
+        view.hideBlurView()
+        view.setCancelButtonEnabled(true)
+    }
 }
