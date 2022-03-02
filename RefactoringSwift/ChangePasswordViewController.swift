@@ -21,15 +21,7 @@ class ChangePasswordViewController: UIViewController {
     lazy var passwordChanger: PasswordChanging = PasswordChanger()
     private lazy var presenter = ChangePasswordPresenter(view: self, viewModel: viewModel)
     var securityToken = ""
-    var viewModel: ChangePasswordViewModel! {
-        didSet {
-            guard isViewLoaded else { return }
-//
-//            if oldValue.inputFocus != viewModel.inputFocus {
-//                updateInputFocus(viewModel.inputFocus)
-//            }
-        }
-    }
+    var viewModel: ChangePasswordViewModel! 
     
     override func viewDidLoad() {
         super.viewDidLoad()
