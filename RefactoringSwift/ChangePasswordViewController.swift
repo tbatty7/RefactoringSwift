@@ -32,7 +32,7 @@ class ChangePasswordViewController: UIViewController {
                 updateBlurView()
             }
             if oldValue.isActivityIndicatorShowing != viewModel.isActivityIndicatorShowing {
-                
+                updateActivityIndicator()
             }
         }
     }
@@ -84,12 +84,7 @@ class ChangePasswordViewController: UIViewController {
         viewModel.inputFocus = .noKeyboard
         viewModel.isCancelButtonEnabled = false
         viewModel.isBlurViewShowing = true
-        view.addSubview(activityIndicator)
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        activityIndicator.startAnimating()
+        viewModel.isActivityIndicatorShowing = true
     }
     
     
@@ -137,11 +132,6 @@ class ChangePasswordViewController: UIViewController {
         }
     }
     
-    private func hideSpinner() {
-        activityIndicator.stopAnimating()
-        activityIndicator.removeFromSuperview()
-    }
-    
     private func startOver() {
         oldPasswordTextField.text = ""
         newPasswordTextField.text = ""
@@ -152,7 +142,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func handleSuccess() {
-        hideSpinner()
+        viewModel.isActivityIndicatorShowing = false
         showAlert(message: viewModel.successMessage,
                   okAction: { [weak self] _ in
             self?.dismiss(animated: true)
@@ -160,7 +150,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func handleFailure(_ message: String) {
-        hideSpinner()
+        viewModel.isActivityIndicatorShowing = false
         showAlert(message: message, okAction: { [weak self] _ in
             self?.startOver()
         })
@@ -203,9 +193,15 @@ class ChangePasswordViewController: UIViewController {
     
     private func updateActivityIndicator() {
         if viewModel.isActivityIndicatorShowing {
-            
+            view.addSubview(activityIndicator)
+            NSLayoutConstraint.activate([
+                activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            ])
+            activityIndicator.startAnimating()
         } else {
-            
+            activityIndicator.stopAnimating()
+            activityIndicator.removeFromSuperview()
         }
     }
 }
