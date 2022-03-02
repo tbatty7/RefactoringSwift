@@ -80,12 +80,9 @@ class ChangePasswordViewController: UIViewController {
     private func setupWaitingAppearance() {
         viewModel.inputFocus = .noKeyboard
         viewModel.isCancelButtonEnabled = false
-        view.backgroundColor = .clear
-        view.addSubview(blurView)
+        viewModel.isBlurViewShowing = true
         view.addSubview(activityIndicator)
         NSLayoutConstraint.activate([
-            blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
-            blurView.widthAnchor.constraint(equalTo: view.widthAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
@@ -147,8 +144,7 @@ class ChangePasswordViewController: UIViewController {
         newPasswordTextField.text = ""
         confirmPasswordTextField.text = ""
         viewModel.inputFocus = .oldPassword
-        view.backgroundColor = .white
-        blurView.removeFromSuperview()
+        viewModel.isBlurViewShowing = false
         viewModel.isCancelButtonEnabled = true
     }
     
@@ -190,9 +186,15 @@ class ChangePasswordViewController: UIViewController {
     
     private func updateBlurView() {
         if viewModel.isBlurViewShowing {
-            
+            view.backgroundColor = .clear
+            view.addSubview(blurView)
+            NSLayoutConstraint.activate([
+                blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
+                blurView.widthAnchor.constraint(equalTo: view.widthAnchor)
+            ])
         } else {
-            
+            view.backgroundColor = .white
+            blurView.removeFromSuperview()
         }
     }
 }
