@@ -70,8 +70,8 @@ class ChangePasswordViewController: UIViewController {
     
     private func attemptToChangePassword() {
         passwordChanger.change(securityToken: securityToken,
-                               oldPassword: oldPasswordTextField.text ?? "",
-                               newPassword: newPasswordTextField.text ?? "",
+                               oldPassword: viewModel.oldPassword,
+                               newPassword: viewModel.newPassword,
                                onSuccess: {[weak self] in self?.handleSuccess()},
                                onFailure: {[weak self] message in self?.handleFailure(message)})
     }
