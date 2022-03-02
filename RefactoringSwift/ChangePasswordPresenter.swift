@@ -30,4 +30,11 @@ class ChangePasswordPresenter {
         view.hideBlurView()
         view.setCancelButtonEnabled(true)
     }
+    
+    func handleFailure(_ message: String) {
+        view.hideActivityIndicator()
+        view.showAlert(message: message, okAction: { [weak self] in
+            self?.startOver()
+        })
+    }
 }
