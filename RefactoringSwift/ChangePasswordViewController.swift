@@ -25,6 +25,9 @@ class ChangePasswordViewController: UIViewController {
             if oldValue.isCancelButtonEnabled != viewModel.isCancelButtonEnabled {
                 cancelBarButton.isEnabled = viewModel.isCancelButtonEnabled
             }
+            if oldValue.inputFocus != viewModel.inputFocus {
+                updateInputFocus()
+            }
         }
     }
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -167,6 +170,19 @@ class ChangePasswordViewController: UIViewController {
         newPasswordTextField.placeholder = viewModel.newPasswordPlaceholder
         confirmPasswordTextField.placeholder = viewModel.confirmPasswordPlaceholder
         submitButton.setTitle(viewModel.submitButtonLabel, for: .normal)
+    }
+    
+    private func updateInputFocus() {
+        switch viewModel.inputFocus {
+        case .noKeyboard:
+            view.endEditing(true)
+        case .oldPassword:
+            oldPasswordTextField.becomeFirstResponder()
+        case .newPassword:
+            newPasswordTextField.becomeFirstResponder()
+        case .confirmPassword:
+            confirmPasswordTextField.becomeFirstResponder()
+        }
     }
 }
 
