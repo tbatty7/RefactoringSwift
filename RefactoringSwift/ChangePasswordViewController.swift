@@ -222,3 +222,5 @@ extension ChangePasswordViewController: UITextFieldDelegate {
         return true
     }
 }
+
+extension ChangePasswordViewController : ChangePasswordViewCommands {}
