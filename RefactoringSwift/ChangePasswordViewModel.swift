@@ -30,9 +30,9 @@ struct ChangePasswordViewModel {
         get { passwordInputs.confirmPassword }
         set { passwordInputs.confirmPassword = newValue }
     }
-    var isOldPasswordEmpty: Bool { oldPassword.isEmpty }
-    var isNewPasswordEmpty: Bool { newPassword.isEmpty }
-    var isNewPasswordTooShort: Bool { newPassword.count < 6 }
-    var isConfirmPasswordMismatched: Bool { newPassword != confirmPassword }
+    var isOldPasswordEmpty: Bool { passwordInputs.oldPassword.isEmpty }
+    var isNewPasswordEmpty: Bool { passwordInputs.newPassword.isEmpty }
+    var isNewPasswordTooShort: Bool { passwordInputs.newPassword.count < 6 }
+    var isConfirmPasswordMismatched: Bool { passwordInputs.newPassword != passwordInputs.confirmPassword }
     var passwordInputs = PasswordInputs()
 }
