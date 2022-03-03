@@ -49,4 +49,11 @@ class ChangePasswordPresenter {
                                onSuccess: {[weak self] in self?.handleSuccess()},
                                onFailure: {[weak self] message in self?.handleFailure(message)})
     }
+    
+    func setupWaitingAppearance() {
+        view.updateInputFocus(.noKeyboard)
+        view.setCancelButtonEnabled(false)
+        view.showBlurView()
+        view.showActivityIndicator()
+    }
 }

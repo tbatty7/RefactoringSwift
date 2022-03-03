@@ -47,17 +47,10 @@ class ChangePasswordViewController: UIViewController {
     @IBAction private func changePassword() {
         updateViewModelToTextFields()
         guard validateInputs() else { return }
-        setupWaitingAppearance()
+        presenter.setupWaitingAppearance()
         presenter.attemptToChangePassword()
     }
 
-    
-    private func setupWaitingAppearance() {
-        updateInputFocus(.noKeyboard)
-        setCancelButtonEnabled(false)
-        showBlurView()
-        showActivityIndicator()
-    }
     
     
     private func validateInputs() -> Bool {
