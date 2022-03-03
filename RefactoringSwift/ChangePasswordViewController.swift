@@ -50,8 +50,6 @@ class ChangePasswordViewController: UIViewController {
         presenter.setupWaitingAppearance()
         presenter.attemptToChangePassword()
     }
-
-    
     
     private func validateInputs() -> Bool {
         if viewModel.isOldPasswordEmpty {
@@ -84,8 +82,7 @@ class ChangePasswordViewController: UIViewController {
 
     private func resetNewPasswords() -> () -> Void {
         return { [weak self] in
-            self?.newPasswordTextField.text = ""
-            self?.confirmPasswordTextField.text = ""
+            self?.clearNewPasswordFields()
             self?.updateInputFocus(.newPassword)
         }
     }
@@ -185,6 +182,11 @@ extension ChangePasswordViewController : ChangePasswordViewCommands {
     
     func clearAllPasswordFields() {
         oldPasswordTextField.text = ""
+        newPasswordTextField.text = ""
+        confirmPasswordTextField.text = ""
+    }
+    
+    func clearNewPasswordFields() {
         newPasswordTextField.text = ""
         confirmPasswordTextField.text = ""
     }

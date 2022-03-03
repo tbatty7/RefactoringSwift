@@ -17,6 +17,7 @@ protocol ChangePasswordViewCommands: AnyObject {
     func setCancelButtonEnabled(_ isEnabled: Bool)
     func updateInputFocus(_ inputFocus: InputFocus)
     func clearAllPasswordFields()
+    func clearNewPasswordFields()
 }
 
 enum InputFocus {
