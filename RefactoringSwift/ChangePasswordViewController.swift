@@ -19,7 +19,7 @@ class ChangePasswordViewController: UIViewController {
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     let activityIndicator = UIActivityIndicatorView(style: .large)
     lazy var passwordChanger: PasswordChanging = PasswordChanger()
-    private var securityToken = ""
+    var securityToken = ""
     private lazy var presenter = ChangePasswordPresenter(view: self, viewModel: viewModel, securityToken: securityToken, passwordChanger: passwordChanger)
     var viewModel: ChangePasswordViewModel! 
     
@@ -48,17 +48,9 @@ class ChangePasswordViewController: UIViewController {
         updateViewModelToTextFields()
         guard validateInputs() else { return }
         setupWaitingAppearance()
-        attemptToChangePassword()
+        presenter.attemptToChangePassword()
     }
 
-    
-    private func attemptToChangePassword() {
-        passwordChanger.change(securityToken: securityToken,
-                               oldPassword: viewModel.oldPassword,
-                               newPassword: viewModel.newPassword,
-                               onSuccess: {[weak self] in self?.presenter.handleSuccess()},
-                               onFailure: {[weak self] message in self?.presenter.handleFailure(message)})
-    }
     
     private func setupWaitingAppearance() {
         updateInputFocus(.noKeyboard)

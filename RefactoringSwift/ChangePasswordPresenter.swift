@@ -20,14 +20,6 @@ class ChangePasswordPresenter {
         self.passwordChanger = passwordChanger
     }
     
-    func handleSuccess() {
-        view.hideActivityIndicator()
-        view.showAlert(message: viewModel.successMessage,
-                  okAction: { [weak self] in
-            self?.view.dismissModal()
-        })
-    }
-    
     private func startOver() {
         view.clearAllPasswordFields()
         view.updateInputFocus(.oldPassword)
@@ -35,10 +27,26 @@ class ChangePasswordPresenter {
         view.setCancelButtonEnabled(true)
     }
     
-    func handleFailure(_ message: String) {
+    private func handleSuccess() {
+        view.hideActivityIndicator()
+        view.showAlert(message: viewModel.successMessage,
+                       okAction: { [weak self] in
+            self?.view.dismissModal()
+        })
+    }
+    
+    private func handleFailure(_ message: String) {
         view.hideActivityIndicator()
         view.showAlert(message: message, okAction: { [weak self] in
             self?.startOver()
         })
+    }
+    
+    func attemptToChangePassword() {
+        passwordChanger.change(securityToken: securityToken,
+                               oldPassword: viewModel.oldPassword,
+                               newPassword: viewModel.newPassword,
+                               onSuccess: {[weak self] in self?.handleSuccess()},
+                               onFailure: {[weak self] message in self?.handleFailure(message)})
     }
 }
