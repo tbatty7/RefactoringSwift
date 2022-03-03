@@ -9,7 +9,7 @@ import Foundation
 
 class ChangePasswordPresenter {
     private unowned var view: ChangePasswordViewCommands!
-    private var viewModel: ChangePasswordViewModel
+    private let viewModel: ChangePasswordViewModel
     private var securityToken: String
     private var passwordChanger: PasswordChanging
     
