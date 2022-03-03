@@ -56,4 +56,11 @@ class ChangePasswordPresenter {
         view.showBlurView()
         view.showActivityIndicator()
     }
+    
+    func resetNewPasswords() -> () -> Void {
+        return { [weak self] in
+            self?.view.clearNewPasswordFields()
+            self?.view.updateInputFocus(.newPassword)
+        }
+    }
 }

@@ -67,24 +67,16 @@ class ChangePasswordViewController: UIViewController {
         
         if viewModel.isNewPasswordTooShort {
             showAlert(message: viewModel.newPasswordTooShortMessage,
-                      okAction: resetNewPasswords())
+                      okAction: presenter.resetNewPasswords())
             
             return false
         }
         
         if viewModel.isConfirmPasswordMismatched {
-            showAlert(message: viewModel.confirmationPasswordDoesNotMatchMessage, okAction: resetNewPasswords())
+            showAlert(message: viewModel.confirmationPasswordDoesNotMatchMessage, okAction: presenter.resetNewPasswords())
             return false
         }
         return true
-    }
-    
-
-    private func resetNewPasswords() -> () -> Void {
-        return { [weak self] in
-            self?.clearNewPasswordFields()
-            self?.updateInputFocus(.newPassword)
-        }
     }
     
     private func setLabels() {
