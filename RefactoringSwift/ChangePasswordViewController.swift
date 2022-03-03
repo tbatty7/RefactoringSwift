@@ -46,18 +46,18 @@ class ChangePasswordViewController: UIViewController {
     
     @IBAction private func changePassword() {
         updateViewModelToTextFields()
-        guard validateInputs() else { return }
+        guard validateInputs(passwordInputs: viewModel.passwordInputs) else { return }
         presenter.setupWaitingAppearance()
         presenter.attemptToChangePassword()
     }
     
-    private func validateInputs() -> Bool {
-        if viewModel.passwordInputs.isOldPasswordEmpty {
+    private func validateInputs(passwordInputs: PasswordInputs) -> Bool {
+        if passwordInputs.isOldPasswordEmpty {
             updateInputFocus(.oldPassword)
             return false
         }
 
-        if viewModel.passwordInputs.isNewPasswordEmpty {
+        if passwordInputs.isNewPasswordEmpty {
             showAlert(message: viewModel.enterNewPasswordMessage,
                       okAction: { [weak self] in
                 self?.updateInputFocus(.newPassword)
@@ -65,14 +65,14 @@ class ChangePasswordViewController: UIViewController {
             return false
         }
         
-        if viewModel.passwordInputs.isNewPasswordTooShort {
+        if passwordInputs.isNewPasswordTooShort {
             showAlert(message: viewModel.newPasswordTooShortMessage,
                       okAction: presenter.resetNewPasswords())
             
             return false
         }
         
-        if viewModel.passwordInputs.isConfirmPasswordMismatched {
+        if passwordInputs.isConfirmPasswordMismatched {
             showAlert(message: viewModel.confirmationPasswordDoesNotMatchMessage, okAction: presenter.resetNewPasswords())
             return false
         }
