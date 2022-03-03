@@ -20,8 +20,8 @@ class ChangePasswordViewController: UIViewController {
     let activityIndicator = UIActivityIndicatorView(style: .large)
     lazy var passwordChanger: PasswordChanging = PasswordChanger()
     var securityToken = ""
-    private lazy var presenter = ChangePasswordPresenter(view: self, viewModel: viewModel, securityToken: securityToken, passwordChanger: passwordChanger)
-    var viewModel: ChangePasswordViewModel! 
+    private lazy var presenter = ChangePasswordPresenter(view: self, viewModel: labels, securityToken: securityToken, passwordChanger: passwordChanger)
+    var labels: ChangePasswordLabels! 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +51,11 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func setLabels() {
-        navigationBar.topItem?.title = viewModel.title
-        oldPasswordTextField.placeholder = viewModel.oldPasswordPlaceholder
-        newPasswordTextField.placeholder = viewModel.newPasswordPlaceholder
-        confirmPasswordTextField.placeholder = viewModel.confirmPasswordPlaceholder
-        submitButton.setTitle(viewModel.submitButtonLabel, for: .normal)
+        navigationBar.topItem?.title = labels.title
+        oldPasswordTextField.placeholder = labels.oldPasswordPlaceholder
+        newPasswordTextField.placeholder = labels.newPasswordPlaceholder
+        confirmPasswordTextField.placeholder = labels.confirmPasswordPlaceholder
+        submitButton.setTitle(labels.submitButtonLabel, for: .normal)
     }
 
 }
@@ -96,7 +96,7 @@ extension ChangePasswordViewController : ChangePasswordViewCommands {
     
     private func showAlert(message: String, okAction: @escaping (UIAlertAction) -> Void) {
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: viewModel.okButtonLabel, style: .default, handler: okAction)
+        let okButton = UIAlertAction(title: labels.okButtonLabel, style: .default, handler: okAction)
         alertController.addAction(okButton)
         alertController.preferredAction = okButton
         present(alertController, animated: true)

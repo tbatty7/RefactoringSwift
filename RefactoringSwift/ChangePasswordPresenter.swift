@@ -9,13 +9,13 @@ import Foundation
 
 class ChangePasswordPresenter {
     private unowned var view: ChangePasswordViewCommands!
-    private let viewModel: ChangePasswordViewModel
+    private let labels: ChangePasswordLabels
     private var securityToken: String
     private var passwordChanger: PasswordChanging
     
-    init(view: ChangePasswordViewCommands, viewModel: ChangePasswordViewModel, securityToken: String, passwordChanger: PasswordChanging) {
+    init(view: ChangePasswordViewCommands, viewModel: ChangePasswordLabels, securityToken: String, passwordChanger: PasswordChanging) {
         self.view = view
-        self.viewModel = viewModel
+        self.labels = viewModel
         self.securityToken = securityToken
         self.passwordChanger = passwordChanger
     }
@@ -29,7 +29,7 @@ class ChangePasswordPresenter {
     
     private func handleSuccess() {
         view.hideActivityIndicator()
-        view.showAlert(message: viewModel.successMessage,
+        view.showAlert(message: labels.successMessage,
                        okAction: { [weak self] in
             self?.view.dismissModal()
         })
@@ -71,7 +71,7 @@ class ChangePasswordPresenter {
         }
 
         if passwordInputs.isNewPasswordEmpty {
-            view.showAlert(message: viewModel.enterNewPasswordMessage,
+            view.showAlert(message: labels.enterNewPasswordMessage,
                       okAction: { [weak self] in
                 self?.view.updateInputFocus(.newPassword)
             })
@@ -79,14 +79,14 @@ class ChangePasswordPresenter {
         }
         
         if passwordInputs.isNewPasswordTooShort {
-            view.showAlert(message: viewModel.newPasswordTooShortMessage,
+            view.showAlert(message: labels.newPasswordTooShortMessage,
                       okAction: resetNewPasswords())
             
             return false
         }
         
         if passwordInputs.isConfirmPasswordMismatched {
-            view.showAlert(message: viewModel.confirmationPasswordDoesNotMatchMessage, okAction: resetNewPasswords())
+            view.showAlert(message: labels.confirmationPasswordDoesNotMatchMessage, okAction: resetNewPasswords())
             return false
         }
         return true
