@@ -35,9 +35,13 @@ class ChangePasswordViewController: UIViewController {
     }
 
     
+//    fileprivate func zz_cancel() {
+//        updateInputFocus(.noKeyboard)
+//        dismissModal()
+//    }
+    
     @IBAction private func cancel() {
-        updateInputFocus(.noKeyboard)
-        dismissModal()
+        presenter.cancel()
     }
     
     deinit {

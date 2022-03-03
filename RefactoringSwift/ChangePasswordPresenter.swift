@@ -91,4 +91,9 @@ class ChangePasswordPresenter {
         }
         return true
     }
+    
+    func cancel() {
+        view.updateInputFocus(.noKeyboard)
+        view.dismissModal()
+    }
 }
