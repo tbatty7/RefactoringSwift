@@ -25,4 +25,5 @@ struct ChangePasswordViewModel {
     var isNewPasswordEmpty: Bool { newPassword.isEmpty }
     var isNewPasswordTooShort: Bool { newPassword.count < 6 }
     var isConfirmPasswordMismatched: Bool { newPassword != confirmPassword }
+    var passwordInputs = PasswordInputs()
 }
