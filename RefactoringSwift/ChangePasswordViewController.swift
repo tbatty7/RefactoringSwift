@@ -52,7 +52,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func validateInputs() -> Bool {
-        if viewModel.isOldPasswordEmpty {
+        if viewModel.passwordInputs.isOldPasswordEmpty {
             updateInputFocus(.oldPassword)
             return false
         }
