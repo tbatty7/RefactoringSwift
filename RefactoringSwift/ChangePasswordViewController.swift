@@ -45,7 +45,9 @@ class ChangePasswordViewController: UIViewController {
     }
     
     @IBAction private func changePassword() {
-        updateViewModelToTextFields()
+        viewModel.passwordInputs.oldPassword = oldPasswordTextField.text ?? ""
+        viewModel.passwordInputs.newPassword = newPasswordTextField.text ?? ""
+        viewModel.passwordInputs.confirmPassword = confirmPasswordTextField.text ?? ""
         guard presenter.validateInputs(passwordInputs: viewModel.passwordInputs) else { return }
         presenter.setupWaitingAppearance()
         presenter.attemptToChangePassword()
@@ -58,12 +60,7 @@ class ChangePasswordViewController: UIViewController {
         confirmPasswordTextField.placeholder = viewModel.confirmPasswordPlaceholder
         submitButton.setTitle(viewModel.submitButtonLabel, for: .normal)
     }
-    
-    private func updateViewModelToTextFields() {
-        viewModel.passwordInputs.oldPassword = oldPasswordTextField.text ?? ""
-        viewModel.passwordInputs.newPassword = newPasswordTextField.text ?? ""
-        viewModel.passwordInputs.confirmPassword = confirmPasswordTextField.text ?? ""
-    }
+
 }
 
 extension ChangePasswordViewController: UITextFieldDelegate {
