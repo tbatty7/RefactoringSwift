@@ -42,7 +42,7 @@ class ChangePasswordPresenter {
         })
     }
     
-    func attemptToChangePassword(_ passwordInputs: PasswordInputs) {
+    private func attemptToChangePassword(_ passwordInputs: PasswordInputs) {
         passwordChanger.change(securityToken: securityToken,
                                oldPassword: passwordInputs.oldPassword,
                                newPassword: passwordInputs.newPassword,
@@ -50,21 +50,21 @@ class ChangePasswordPresenter {
                                onFailure: {[weak self] message in self?.handleFailure(message)})
     }
     
-    func setupWaitingAppearance() {
+    private func setupWaitingAppearance() {
         view.updateInputFocus(.noKeyboard)
         view.setCancelButtonEnabled(false)
         view.showBlurView()
         view.showActivityIndicator()
     }
     
-    func resetNewPasswords() -> () -> Void {
+    private func resetNewPasswords() -> () -> Void {
         return { [weak self] in
             self?.view.clearNewPasswordFields()
             self?.view.updateInputFocus(.newPassword)
         }
     }
     
-    func validateInputs(passwordInputs: PasswordInputs) -> Bool {
+    private func validateInputs(passwordInputs: PasswordInputs) -> Bool {
         if passwordInputs.isOldPasswordEmpty {
             view.updateInputFocus(.oldPassword)
             return false
