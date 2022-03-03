@@ -57,7 +57,7 @@ class ChangePasswordViewController: UIViewController {
             return false
         }
 
-        if viewModel.isNewPasswordEmpty {
+        if viewModel.passwordInputs.isNewPasswordEmpty {
             showAlert(message: viewModel.enterNewPasswordMessage,
                       okAction: { [weak self] in
                 self?.updateInputFocus(.newPassword)
@@ -65,14 +65,14 @@ class ChangePasswordViewController: UIViewController {
             return false
         }
         
-        if viewModel.isNewPasswordTooShort {
+        if viewModel.passwordInputs.isNewPasswordTooShort {
             showAlert(message: viewModel.newPasswordTooShortMessage,
                       okAction: presenter.resetNewPasswords())
             
             return false
         }
         
-        if viewModel.isConfirmPasswordMismatched {
+        if viewModel.passwordInputs.isConfirmPasswordMismatched {
             showAlert(message: viewModel.confirmationPasswordDoesNotMatchMessage, okAction: presenter.resetNewPasswords())
             return false
         }

@@ -18,8 +18,5 @@ struct ChangePasswordViewModel {
     let newPasswordPlaceholder: String
     let confirmPasswordPlaceholder: String
     let submitButtonLabel: String
-    var isNewPasswordEmpty: Bool { passwordInputs.isNewPasswordEmpty }
-    var isNewPasswordTooShort: Bool { passwordInputs.isNewPasswordTooShort }
-    var isConfirmPasswordMismatched: Bool { passwordInputs.isConfirmPasswordMismatched }
     var passwordInputs = PasswordInputs()
 }
