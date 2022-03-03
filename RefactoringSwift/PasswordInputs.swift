@@ -11,4 +11,5 @@ struct PasswordInputs {
     var oldPassword = ""
     var newPassword = ""
     var confirmPassword = ""
+    var isOldPasswordEmpty: Bool { oldPassword.isEmpty }
 }
