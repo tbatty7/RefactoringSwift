@@ -33,12 +33,6 @@ class ChangePasswordViewController: UIViewController {
         activityIndicator.color = .white
         setLabels()
     }
-
-    
-//    fileprivate func zz_cancel() {
-//        updateInputFocus(.noKeyboard)
-//        dismissModal()
-//    }
     
     @IBAction private func cancel() {
         presenter.cancel()
@@ -53,6 +47,10 @@ class ChangePasswordViewController: UIViewController {
             oldPassword: oldPasswordTextField.text ?? "",
             newPassword: newPasswordTextField.text ?? "",
             confirmPassword: confirmPasswordTextField.text ?? "")
+        zz_changePassword(passwordInputs)
+    }
+    
+    func zz_changePassword(_ passwordInputs: PasswordInputs) {
         guard presenter.validateInputs(passwordInputs: passwordInputs) else { return }
         presenter.setupWaitingAppearance()
         presenter.attemptToChangePassword(passwordInputs)
