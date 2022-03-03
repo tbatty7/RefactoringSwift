@@ -45,9 +45,6 @@ class ChangePasswordViewController: UIViewController {
     }
     
     @IBAction private func changePassword() {
-//        viewModel.passwordInputs.oldPassword = oldPasswordTextField.text ?? ""
-//        viewModel.passwordInputs.newPassword = newPasswordTextField.text ?? ""
-//        viewModel.passwordInputs.confirmPassword = confirmPasswordTextField.text ?? ""
         let passwordInputs = PasswordInputs(
             oldPassword: oldPasswordTextField.text ?? "",
             newPassword: newPasswordTextField.text ?? "",

@@ -18,5 +18,4 @@ struct ChangePasswordViewModel {
     let newPasswordPlaceholder: String
     let confirmPasswordPlaceholder: String
     let submitButtonLabel: String
-    var passwordInputs = PasswordInputs()
 }
