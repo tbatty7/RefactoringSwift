@@ -20,7 +20,7 @@ class ChangePasswordViewController: UIViewController {
     let activityIndicator = UIActivityIndicatorView(style: .large)
     lazy var passwordChanger: PasswordChanging = PasswordChanger()
     var securityToken = ""
-    private lazy var presenter = ChangePasswordPresenter(view: self, viewModel: labels, securityToken: securityToken, passwordChanger: passwordChanger)
+    private lazy var presenter = ChangePasswordPresenter(view: self, labels: labels, securityToken: securityToken, passwordChanger: passwordChanger)
     var labels: ChangePasswordLabels! 
     
     override func viewDidLoad() {

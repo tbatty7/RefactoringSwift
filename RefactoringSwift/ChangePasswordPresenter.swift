@@ -13,9 +13,9 @@ class ChangePasswordPresenter {
     private var securityToken: String
     private var passwordChanger: PasswordChanging
     
-    init(view: ChangePasswordViewCommands, viewModel: ChangePasswordLabels, securityToken: String, passwordChanger: PasswordChanging) {
+    init(view: ChangePasswordViewCommands, labels: ChangePasswordLabels, securityToken: String, passwordChanger: PasswordChanging) {
         self.view = view
-        self.labels = viewModel
+        self.labels = labels
         self.securityToken = securityToken
         self.passwordChanger = passwordChanger
     }
