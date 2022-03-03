@@ -12,4 +12,7 @@ struct PasswordInputs {
     var newPassword = ""
     var confirmPassword = ""
     var isOldPasswordEmpty: Bool { oldPassword.isEmpty }
+    var isNewPasswordEmpty: Bool { newPassword.isEmpty }
+    var isNewPasswordTooShort: Bool { newPassword.count < 6 }
+    var isConfirmPasswordMismatched: Bool { newPassword != confirmPassword }
 }
