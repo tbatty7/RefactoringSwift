@@ -96,4 +96,10 @@ class ChangePasswordPresenter {
         view.updateInputFocus(.noKeyboard)
         view.dismissModal()
     }
+    
+    func changePassword(_ passwordInputs: PasswordInputs) {
+        guard validateInputs(passwordInputs: passwordInputs) else { return }
+        setupWaitingAppearance()
+        attemptToChangePassword(passwordInputs)
+    }
 }

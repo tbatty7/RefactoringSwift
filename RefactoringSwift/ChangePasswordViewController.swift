@@ -47,13 +47,7 @@ class ChangePasswordViewController: UIViewController {
             oldPassword: oldPasswordTextField.text ?? "",
             newPassword: newPasswordTextField.text ?? "",
             confirmPassword: confirmPasswordTextField.text ?? "")
-        zz_changePassword(passwordInputs)
-    }
-    
-    func zz_changePassword(_ passwordInputs: PasswordInputs) {
-        guard presenter.validateInputs(passwordInputs: passwordInputs) else { return }
-        presenter.setupWaitingAppearance()
-        presenter.attemptToChangePassword(passwordInputs)
+        presenter.changePassword(passwordInputs)
     }
     
     private func setLabels() {
