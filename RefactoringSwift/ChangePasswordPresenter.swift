@@ -63,4 +63,32 @@ class ChangePasswordPresenter {
             self?.view.updateInputFocus(.newPassword)
         }
     }
+    
+    func validateInputs(passwordInputs: PasswordInputs) -> Bool {
+        if passwordInputs.isOldPasswordEmpty {
+            view.updateInputFocus(.oldPassword)
+            return false
+        }
+
+        if passwordInputs.isNewPasswordEmpty {
+            view.showAlert(message: viewModel.enterNewPasswordMessage,
+                      okAction: { [weak self] in
+                self?.view.updateInputFocus(.newPassword)
+            })
+            return false
+        }
+        
+        if passwordInputs.isNewPasswordTooShort {
+            view.showAlert(message: viewModel.newPasswordTooShortMessage,
+                      okAction: resetNewPasswords())
+            
+            return false
+        }
+        
+        if passwordInputs.isConfirmPasswordMismatched {
+            view.showAlert(message: viewModel.confirmationPasswordDoesNotMatchMessage, okAction: resetNewPasswords())
+            return false
+        }
+        return true
+    }
 }

@@ -46,37 +46,9 @@ class ChangePasswordViewController: UIViewController {
     
     @IBAction private func changePassword() {
         updateViewModelToTextFields()
-        guard validateInputs(passwordInputs: viewModel.passwordInputs) else { return }
+        guard presenter.validateInputs(passwordInputs: viewModel.passwordInputs) else { return }
         presenter.setupWaitingAppearance()
         presenter.attemptToChangePassword()
-    }
-    
-    private func validateInputs(passwordInputs: PasswordInputs) -> Bool {
-        if passwordInputs.isOldPasswordEmpty {
-            updateInputFocus(.oldPassword)
-            return false
-        }
-
-        if passwordInputs.isNewPasswordEmpty {
-            showAlert(message: viewModel.enterNewPasswordMessage,
-                      okAction: { [weak self] in
-                self?.updateInputFocus(.newPassword)
-            })
-            return false
-        }
-        
-        if passwordInputs.isNewPasswordTooShort {
-            showAlert(message: viewModel.newPasswordTooShortMessage,
-                      okAction: presenter.resetNewPasswords())
-            
-            return false
-        }
-        
-        if passwordInputs.isConfirmPasswordMismatched {
-            showAlert(message: viewModel.confirmationPasswordDoesNotMatchMessage, okAction: presenter.resetNewPasswords())
-            return false
-        }
-        return true
     }
     
     private func setLabels() {
