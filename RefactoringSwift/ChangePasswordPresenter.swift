@@ -10,10 +10,14 @@ import Foundation
 class ChangePasswordPresenter {
     private unowned var view: ChangePasswordViewCommands!
     private var viewModel: ChangePasswordViewModel
+    private var securityToken: String
+    private var passwordChanger: PasswordChanging
     
-    init(view: ChangePasswordViewCommands, viewModel: ChangePasswordViewModel) {
+    init(view: ChangePasswordViewCommands, viewModel: ChangePasswordViewModel, securityToken: String, passwordChanger: PasswordChanging) {
         self.view = view
         self.viewModel = viewModel
+        self.securityToken = securityToken
+        self.passwordChanger = passwordChanger
     }
     
     func handleSuccess() {
@@ -24,7 +28,7 @@ class ChangePasswordPresenter {
         })
     }
     
-    func startOver() {
+    private func startOver() {
         view.clearAllPasswordFields()
         view.updateInputFocus(.oldPassword)
         view.hideBlurView()
