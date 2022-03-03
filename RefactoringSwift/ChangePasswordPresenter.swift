@@ -44,8 +44,8 @@ class ChangePasswordPresenter {
     
     func attemptToChangePassword() {
         passwordChanger.change(securityToken: securityToken,
-                               oldPassword: viewModel.oldPassword,
-                               newPassword: viewModel.newPassword,
+                               oldPassword: viewModel.passwordInputs.oldPassword,
+                               newPassword: viewModel.passwordInputs.newPassword,
                                onSuccess: {[weak self] in self?.handleSuccess()},
                                onFailure: {[weak self] message in self?.handleFailure(message)})
     }
